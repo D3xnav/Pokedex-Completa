@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokédex Pro Max - </title>
+    <title>Pokédex Pro Max</title>
     <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -43,7 +43,7 @@
             margin: 0 auto;
         }
         
-        /* HEADER COM ANIMAÇÃO E POKÉMON */
+        /* HEADER SIMPLIFICADO - SEM IMAGENS PROBLEMÁTICAS */
         header {
             text-align: center;
             padding: 30px 20px;
@@ -92,55 +92,6 @@
             max-width: 600px;
             margin: 0 auto;
             line-height: 1.6;
-        }
-        
-        /* POKÉMON NO HEADER */
-        .header-pokemon {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 120px;
-            height: 120px;
-            filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
-            z-index: 1;
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        .gengar {
-            left: 40px;
-            animation-delay: 0s;
-        }
-        
-        .krookodile {
-            right: 40px;
-            animation-delay: 1.5s;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(-50%) translateY(0px); }
-            50% { transform: translateY(-50%) translateY(-15px); }
-        }
-        
-        @media (max-width: 1100px) {
-            .header-pokemon {
-                width: 80px;
-                height: 80px;
-            }
-            .gengar { left: 20px; }
-            .krookodile { right: 20px; }
-        }
-        
-        @media (max-width: 768px) {
-            .header-title {
-                font-size: 2.5rem;
-            }
-            .header-pokemon {
-                width: 60px;
-                height: 60px;
-            }
-            .gengar, .krookodile {
-                display: none;
-            }
         }
         
         /* === BARRA DE PESQUISA MELHORADA === */
@@ -295,6 +246,13 @@
             background: rgba(0, 0, 0, 0.2);
             border-radius: 10px;
             padding: 5px;
+            /* Fallback visual se imagem não carregar */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 0.7rem;
         }
         
         .pokemon-name {
@@ -749,10 +707,7 @@
             background: var(--primary);
             transform: scale(1.05);
         }
-        .language-toggle:hover {
-            background: var(--primary);
-            transform: scale(1.05);
-        }
+
         /* ==================== MOBILE FIXES ==================== */
         @media (max-width: 768px) {
             /* HEADER */
@@ -779,14 +734,14 @@
             
             .search-input, .type-filter {
                 padding: 14px 15px 14px 45px;
-                font-size: 16px; /* Evita zoom no iOS */
+                font-size: 16px;
             }
             
             .search-icon {
                 left: 15px;
             }
             
-            /* LISTA DE POKÉMON - MELHORADA */
+            /* LISTA DE POKÉMON */
             .pokemon-list {
                 border-radius: 12px;
             }
@@ -841,7 +796,7 @@
                 font-size: 0.9rem;
             }
             
-            /* MODAL - OTIMIZADO PARA MOBILE */
+            /* MODAL */
             .modal {
                 padding: 10px;
             }
@@ -923,7 +878,7 @@
             
             /* MELHORIAS DE TOUCH */
             .pokemon-item, .page-btn, .close-modal, .language-toggle {
-                min-height: 44px; /* Tamanho mínimo para toque */
+                min-height: 44px;
             }
             
             /* EVITA ZOOM EM INPUTS iOS */
@@ -995,7 +950,6 @@
         }
 
         /* ==================== MELHORIAS GERAIS TOUCH ==================== */
-        /* Aumenta área de clique para toque */
         button, 
         .pokemon-item, 
         .page-btn, 
@@ -1004,21 +958,19 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* Suaviza scroll no iOS */
         body {
             -webkit-overflow-scrolling: touch;
         }
 
-        /* Previne highlight azul no iOS */
         * {
             -webkit-tap-highlight-color: rgba(0,0,0,0);
         }
 
-        /* Melhora performance de animações */
         .pokemon-item, .page-btn, .type-tag {
             will-change: transform;
             transform: translateZ(0);
         }
+        
         /* TYPE COLORS */
         .type-grass { background: var(--grass); }
         .type-poison { background: var(--poison); }
@@ -1048,16 +1000,8 @@
     </div>
 
     <div class="container">
-        <!-- HEADER COM TÍTULO ANIMADO E POKÉMON -->
+        <!-- HEADER SIMPLIFICADO -->
         <header>
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/94.png" 
-                 alt="Gengar" 
-                 class="header-pokemon gengar">
-            
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/553.png" 
-                 alt="Krookodile" 
-                 class="header-pokemon krookodile">
-            
             <div class="header-content">
                 <h1 class="header-title" id="homeButton">
                     POKÉDEX PRO MAX
@@ -1246,7 +1190,7 @@
         updateLoadingText("Carregando Pokémon...");
         
         try {
-            // CARREGAR OS PRIMEIROS 50 POKÉMON IMEDIATAMENTE PARA MOSTRAR NOMES REAIS
+            // CARREGAR OS PRIMEIROS 50 POKÉMON IMEDIATAMENTE
             const initialLoad = [];
             const initialCount = Math.min(50, POKEMON_COUNT);
             
@@ -1315,12 +1259,10 @@
             const pokemon = {
                 id: id,
                 name: pokemonData.name,
-                namePT: formatName(pokemonData.name), // Nome em inglês formatado como fallback
+                namePT: formatName(pokemonData.name),
                 types: pokemonData.types.map(t => t.type.name),
-                sprite: pokemonData.sprites.other['official-artwork']?.front_default ||
-                       pokemonData.sprites.other?.dream_world?.front_default ||
-                       pokemonData.sprites.front_default ||
-                       `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`,
+                // SPRITE SIMPLES QUE SEMPRE FUNCIONA
+                sprite: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`,
                 stats: {
                     hp: pokemonData.stats[0].base_stat,
                     attack: pokemonData.stats[1].base_stat,
@@ -1371,9 +1313,8 @@
             
             const promises = [];
             for (let i = start; i < end; i++) {
-                // Apenas carregar se ainda não foi carregado
                 if (!allPokemon[i] || !allPokemon[i].isLoaded) {
-                    promises.push(loadSinglePokemon(i + 1)); // +1 porque IDs começam em 1
+                    promises.push(loadSinglePokemon(i + 1));
                 }
             }
             
@@ -1419,7 +1360,6 @@
             }
         }
         
-        // Atualizar filteredPokemon
         filteredPokemon = [...allPokemon];
         applyFilters();
     }
@@ -1468,10 +1408,11 @@
                 <div class="pokemon-item" onclick="openPokemonDetail(${pokemon.id})">
                     <div class="pokemon-number">#${pokemon.id.toString().padStart(4, '0')}</div>
                     <div>
-                        <img class="pokemon-image" src="${pokemon.sprite}" 
+                        <img class="pokemon-image" 
+                             src="${pokemon.sprite}" 
                              alt="${displayName}"
                              loading="lazy"
-                             onerror="this.src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png'">
+                             onerror="this.onerror=null; this.style.background='linear-gradient(135deg, #1a1a2e, #16213e)'; this.innerHTML='#${pokemon.id}';">
                     </div>
                     <div class="pokemon-name">
                         <div>
@@ -1634,10 +1575,10 @@
                 loadTypeData(pokemon.types)
             ]);
             
-            // Carregar descrições das habilidades em português
+            // Carregar descrições das habilidades
             await loadAbilityDescriptionsPT(pokemon.abilities);
             
-            // Renderizar detalhes COM GRÁFICO DE FRAQUEZAS
+            // Renderizar detalhes
             renderPokemonDetailPage(pokemon, speciesData, typeData);
             
         } catch (error) {
@@ -1711,108 +1652,101 @@
         return weaknesses;
     }
 
-    // CARREGAR DESCRIÇÕES DAS HABILIDADES EM PORTUGUÊS - VERSÃO CORRIGIDA
-   // CARREGAR DESCRIÇÕES DAS HABILIDADES EM PORTUGUÊS - VERSÃO FINAL CORRIGIDA
-async function loadAbilityDescriptionsPT(abilities) {
-    for (const ability of abilities) {
-        const abilityName = ability.ability.name;
-        
-        if (!abilityCache.has(abilityName)) {
-            try {
-                const response = await fetch(ability.ability.url);
-                const data = await response.json();
-                
-                // 1. Tentar obter descrição em português do Brasil
-                let finalDescription = null;
-                let hasPortuguese = true;
-                
-                // Primeiro tentar effect_entries em português
-                if (data.effect_entries) {
-                    const ptEffect = data.effect_entries.find(e => e.language.name === 'pt-BR');
-                    if (ptEffect && ptEffect.effect) {
-                        finalDescription = ptEffect.effect;
-                    }
-                }
-                
-                // Se não encontrou, tentar flavor_text_entries em português
-                if (!finalDescription && data.flavor_text_entries) {
-                    const ptFlavor = data.flavor_text_entries.find(f => f.language.name === 'pt-BR');
-                    if (ptFlavor && ptFlavor.flavor_text) {
-                        finalDescription = ptFlavor.flavor_text;
-                    }
-                }
-                
-                // 2. Se não tem português, buscar em inglês
-                if (!finalDescription) {
-                    hasPortuguese = false;
+    // CARREGAR DESCRIÇÕES DAS HABILIDADES - VERSÃO SIMPLIFICADA
+    async function loadAbilityDescriptionsPT(abilities) {
+        for (const ability of abilities) {
+            const abilityName = ability.ability.name;
+            
+            if (!abilityCache.has(abilityName)) {
+                try {
+                    const response = await fetch(ability.ability.url);
+                    const data = await response.json();
                     
-                    // Primeiro tentar effect_entries em inglês
+                    let description = null;
+                    let hasPortuguese = true;
+                    
+                    // 1. Tentar português primeiro
                     if (data.effect_entries) {
-                        const enEffect = data.effect_entries.find(e => e.language.name === 'en');
-                        if (enEffect && enEffect.effect) {
-                            finalDescription = enEffect.effect;
+                        const ptEffect = data.effect_entries.find(e => e.language.name === 'pt-BR');
+                        if (ptEffect && ptEffect.effect) {
+                            description = ptEffect.effect;
                         }
                     }
                     
-                    // Se não encontrou, tentar flavor_text_entries em inglês
-                    if (!finalDescription && data.flavor_text_entries) {
-                        const enFlavor = data.flavor_text_entries.find(f => f.language.name === 'en');
-                        if (enFlavor && enFlavor.flavor_text) {
-                            finalDescription = enFlavor.flavor_text;
+                    if (!description && data.flavor_text_entries) {
+                        const ptFlavor = data.flavor_text_entries.find(f => f.language.name === 'pt-BR');
+                        if (ptFlavor && ptFlavor.flavor_text) {
+                            description = ptFlavor.flavor_text;
                         }
                     }
                     
-                    // 3. Se não tem nem português nem inglês
-                    if (!finalDescription) {
-                        finalDescription = 'Descrição não disponível na PokeAPI.';
+                    // 2. Se não tem português, tentar inglês
+                    if (!description) {
+                        hasPortuguese = false;
+                        
+                        if (data.effect_entries) {
+                            const enEffect = data.effect_entries.find(e => e.language.name === 'en');
+                            if (enEffect && enEffect.effect) {
+                                description = enEffect.effect;
+                            }
+                        }
+                        
+                        if (!description && data.flavor_text_entries) {
+                            const enFlavor = data.flavor_text_entries.find(f => f.language.name === 'en');
+                            if (enFlavor && enFlavor.flavor_text) {
+                                description = enFlavor.flavor_text;
+                            }
+                        }
+                        
+                        // 3. Se não tem nada
+                        if (!description) {
+                            description = 'Descrição não disponível para esta habilidade.';
+                        }
                     }
+                    
+                    // Formatar nome
+                    const formattedName = abilityName
+                        .split('-')
+                        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                        .join(' ');
+                    
+                    // Salvar no cache
+                    abilityCache.set(abilityName, {
+                        name: formattedName,
+                        description: description,
+                        isHidden: ability.is_hidden,
+                        hasPortuguese: hasPortuguese
+                    });
+                    
+                } catch (error) {
+                    console.warn(`Erro ao carregar habilidade ${abilityName}:`, error);
+                    
+                    const formattedName = abilityName
+                        .split('-')
+                        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                        .join(' ');
+                    
+                    abilityCache.set(abilityName, {
+                        name: formattedName,
+                        description: 'Erro ao carregar descrição. Tente novamente.',
+                        isHidden: ability.is_hidden,
+                        hasPortuguese: false
+                    });
                 }
-                
-                // Processar nome da habilidade (primeira letra maiúscula)
-                const formattedName = abilityName
-                    .split('-')
-                    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                    .join(' ');
-                
-                // Salvar no cache
-                abilityCache.set(abilityName, {
-                    name: formattedName,
-                    description: finalDescription, // ✅ AGORA TEM A DESCRIÇÃO REAL
-                    isHidden: ability.is_hidden,
-                    hasPortuguese: hasPortuguese
-                });
-                
-                console.log(`✅ Habilidade: ${formattedName}`, hasPortuguese ? '(PT-BR)' : '(EN)');
-                
-            } catch (error) {
-                console.warn(`Erro ao carregar habilidade ${abilityName}:`, error);
-                
-                // Fallback básico
-                const formattedName = abilityName
-                    .split('-')
-                    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                    .join(' ');
-                
-                abilityCache.set(abilityName, {
-                    name: formattedName,
-                    description: 'Erro ao carregar descrição. Tente novamente.',
-                    isHidden: ability.is_hidden,
-                    hasPortuguese: false
-                });
             }
         }
     }
-}
 
     function renderPokemonDetailPage(pokemon, speciesData, typeData) {
         const displayName = usePortuguese ? pokemon.namePT : formatName(pokemon.name);
         
-        // Calcular fraquezas baseadas nos dados da PokeAPI
+        // Calcular fraquezas
         const weaknesses = calculateWeaknesses(pokemon.types, typeData);
         
-        // COLUNA ESQUERDA - COM GRÁFICO DE FRAQUEZAS
+        // COLUNA ESQUERDA
         let leftHtml = `
-            <img class="pokemon-detail-image" src="${pokemon.sprite}" 
+            <img class="pokemon-detail-image" 
+                 src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png" 
                  alt="${displayName}"
                  onerror="this.src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png'">
             <h2 class="detail-title">${displayName}</h2>
@@ -1834,8 +1768,6 @@ async function loadAbilityDescriptionsPT(abilities) {
         `;
         
         document.getElementById('modalLeft').innerHTML = leftHtml;
-        
-        // Renderizar gráfico de fraquezas IMEDIATAMENTE
         renderWeaknessChart(weaknesses);
         
         // COLUNA DIREITA
@@ -1881,14 +1813,13 @@ async function loadAbilityDescriptionsPT(abilities) {
             </div>
         `;
         
-        // 2. ABILITIES (Habilidades) - COM DESCRIÇÕES EM PORTUGUÊS
+        // 2. ABILITIES
         if (pokemon.abilities.length > 0) {
             rightHtml += `
                 <div class="detail-section">
                     <h3 class="section-title"><i class="fas fa-star"></i> Habilidades</h3>
             `;
             
-            // Ordenar: habilidades normais primeiro, depois hidden
             const sortedAbilities = [...pokemon.abilities].sort((a, b) => 
                 (a.is_hidden ? 1 : 0) - (b.is_hidden ? 1 : 0)
             );
@@ -1900,7 +1831,8 @@ async function loadAbilityDescriptionsPT(abilities) {
                         .map(word => word.charAt(0).toUpperCase() + word.slice(1))
                         .join(' '),
                     description: 'Carregando descrição...',
-                    isHidden: ability.is_hidden
+                    isHidden: ability.is_hidden,
+                    hasPortuguese: true
                 };
                 
                 rightHtml += `
@@ -1911,7 +1843,7 @@ async function loadAbilityDescriptionsPT(abilities) {
                             ${abilityInfo.isHidden ? 
                                 '<span class="ability-hidden">Habilidade Oculta</span>' : 
                                 ''}
-                            ${abilityInfo.hasPortuguese === false ? 
+                            ${!abilityInfo.hasPortuguese ? 
                                 '<span style="margin-left: 8px; color: #ff9800; font-size: 0.8rem; background: rgba(255,152,0,0.1); padding: 2px 8px; border-radius: 10px; border: 1px solid #ff9800;"><i class="fas fa-language"></i> Somente EN</span>' : 
                                 ''}
                         </div>
@@ -1958,7 +1890,7 @@ async function loadAbilityDescriptionsPT(abilities) {
             </div>
         `;
         
-        // 4. DESCRIÇÃO DA POKÉDEX
+        // 4. POKÉDEX DESCRIPTION
         if (speciesData) {
             let pokedexText = '';
             if (usePortuguese) {
@@ -1984,8 +1916,6 @@ async function loadAbilityDescriptionsPT(abilities) {
         }
         
         document.getElementById('modalRight').innerHTML = rightHtml;
-        
-        // Renderizar gráfico de stats
         renderStatsChart(pokemon.stats);
     }
 
@@ -1993,12 +1923,8 @@ async function loadAbilityDescriptionsPT(abilities) {
         const ctx = document.getElementById('weaknessChart');
         if (!ctx) return;
         
-        // Destruir gráfico anterior se existir
-        if (weaknessChart) {
-            weaknessChart.destroy();
-        }
+        if (weaknessChart) weaknessChart.destroy();
         
-        // Filtrar apenas fraquezas significativas (≠ 1)
         const filteredWeaknesses = Object.entries(weaknesses)
             .filter(([type, multiplier]) => multiplier !== 1)
             .sort((a, b) => b[1] - a[1]);
@@ -2006,7 +1932,6 @@ async function loadAbilityDescriptionsPT(abilities) {
         const labels = filteredWeaknesses.map(([type]) => TYPE_MAP[type] || type);
         const data = filteredWeaknesses.map(([_, multiplier]) => multiplier);
         const colors = filteredWeaknesses.map(([type]) => {
-            // Mapear tipos para cores
             const colorMap = {
                 'normal': '#A8A878', 'fire': '#F08030', 'water': '#6890F0',
                 'electric': '#F8D030', 'grass': '#78C850', 'ice': '#98D8D8',
@@ -2142,9 +2067,9 @@ async function loadAbilityDescriptionsPT(abilities) {
         const displayName = usePortuguese ? pokemon.namePT : formatName(pokemon.name);
         
         document.getElementById('modalLeft').innerHTML = `
-            <img class="pokemon-detail-image" src="${pokemon.sprite}" 
-                 alt="${displayName}"
-                 onerror="this.src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png'">
+            <img class="pokemon-detail-image" 
+                 src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png" 
+                 alt="${displayName}">
             <h2 class="detail-title">${displayName}</h2>
             <div class="detail-number">#${pokemon.id.toString().padStart(4, '0')}</div>
             <div class="detail-types">
