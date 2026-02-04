@@ -749,7 +749,276 @@
             background: var(--primary);
             transform: scale(1.05);
         }
+        .language-toggle:hover {
+            background: var(--primary);
+            transform: scale(1.05);
+        }
+        /* ==================== MOBILE FIXES ==================== */
+        @media (max-width: 768px) {
+            /* HEADER */
+            header {
+                padding: 20px 15px;
+                margin-bottom: 20px;
+            }
+            
+            .header-title {
+                font-size: 2.2rem;
+                padding: 8px 15px;
+            }
+            
+            .subtitle {
+                font-size: 0.9rem;
+                padding: 0 10px;
+            }
+            
+            /* BARRA DE PESQUISA */
+            .search-section {
+                padding: 15px;
+                gap: 15px;
+            }
+            
+            .search-input, .type-filter {
+                padding: 14px 15px 14px 45px;
+                font-size: 16px; /* Evita zoom no iOS */
+            }
+            
+            .search-icon {
+                left: 15px;
+            }
+            
+            /* LISTA DE POKÉMON - MELHORADA */
+            .pokemon-list {
+                border-radius: 12px;
+            }
+            
+            .list-header {
+                padding: 12px 8px;
+                grid-template-columns: 50px 1fr 60px 60px;
+                font-size: 0.75rem;
+            }
+            
+            .list-header span:nth-child(1) { text-align: center; }
+            .list-header span:nth-child(2) { padding-left: 10px; }
+            .list-header span:nth-child(3),
+            .list-header span:nth-child(4) { text-align: center; }
+            
+            .pokemon-item {
+                grid-template-columns: 50px 1fr 60px 60px;
+                padding: 12px 8px;
+                font-size: 0.85rem;
+            }
+            
+            .pokemon-number {
+                font-size: 0.8rem;
+                text-align: center;
+            }
+            
+            .pokemon-name {
+                font-size: 1rem;
+                padding-left: 10px;
+            }
+            
+            .pokemon-types {
+                flex-wrap: wrap;
+                gap: 4px;
+                margin-top: 8px;
+            }
+            
+            .type-tag {
+                padding: 3px 8px;
+                font-size: 0.7rem;
+            }
+            
+            /* PAGINAÇÃO */
+            .pagination {
+                gap: 6px;
+                margin: 30px 0;
+            }
+            
+            .page-btn {
+                padding: 8px 12px;
+                min-width: 40px;
+                font-size: 0.9rem;
+            }
+            
+            /* MODAL - OTIMIZADO PARA MOBILE */
+            .modal {
+                padding: 10px;
+            }
+            
+            .modal-content {
+                margin: 20px auto;
+                padding: 20px;
+                border-radius: 20px;
+            }
+            
+            .modal-body {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            
+            .modal-left {
+                padding: 20px;
+            }
+            
+            .pokemon-detail-image {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .detail-title {
+                font-size: 1.8rem;
+            }
+            
+            .weakness-chart-wrapper {
+                height: 180px;
+            }
+            
+            /* SEÇÕES DO MODAL */
+            .detail-section {
+                padding: 20px;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+                margin-bottom: 15px;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .info-item {
+                padding: 10px 0;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            
+            .stat-box {
+                padding: 12px;
+            }
+            
+            .stat-value {
+                font-size: 1.5rem;
+            }
+            
+            /* BOTÕES MAIORES */
+            .close-modal {
+                padding: 10px 15px;
+                font-size: 1.1rem;
+                top: 15px;
+                right: 15px;
+            }
+            
+            .language-toggle {
+                top: 15px;
+                right: 15px;
+                padding: 6px 12px;
+                font-size: 0.9rem;
+            }
+            
+            /* MELHORIAS DE TOUCH */
+            .pokemon-item, .page-btn, .close-modal, .language-toggle {
+                min-height: 44px; /* Tamanho mínimo para toque */
+            }
+            
+            /* EVITA ZOOM EM INPUTS iOS */
+            input, select, textarea {
+                font-size: 16px;
+            }
+        }
 
+        /* ==================== SMALL PHONES ==================== */
+        @media (max-width: 480px) {
+            .header-title {
+                font-size: 1.8rem;
+                letter-spacing: 1px;
+            }
+            
+            .list-header, .pokemon-item {
+                grid-template-columns: 45px 1fr 55px 55px;
+            }
+            
+            .pokemon-stat {
+                font-size: 0.8rem;
+            }
+            
+            .pagination {
+                gap: 4px;
+            }
+            
+            .page-btn {
+                padding: 6px 10px;
+                min-width: 36px;
+                font-size: 0.85rem;
+            }
+            
+            .modal-content {
+                padding: 15px;
+            }
+            
+            .pokemon-detail-image {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .detail-title {
+                font-size: 1.6rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ==================== TABLETS ==================== */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header-title {
+                font-size: 3rem;
+            }
+            
+            .list-header {
+                grid-template-columns: 60px 120px 1fr repeat(3, 80px);
+            }
+            
+            .pokemon-item {
+                grid-template-columns: 60px 120px 1fr repeat(3, 80px);
+            }
+        }
+
+        /* ==================== MELHORIAS GERAIS TOUCH ==================== */
+        /* Aumenta área de clique para toque */
+        button, 
+        .pokemon-item, 
+        .page-btn, 
+        .evolution-item {
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Suaviza scroll no iOS */
+        body {
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Previne highlight azul no iOS */
+        * {
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+        }
+
+        /* Melhora performance de animações */
+        .pokemon-item, .page-btn, .type-tag {
+            will-change: transform;
+            transform: translateZ(0);
+        }
         /* TYPE COLORS */
         .type-grass { background: var(--grass); }
         .type-poison { background: var(--poison); }
@@ -1442,88 +1711,98 @@
         return weaknesses;
     }
 
-    // CARREGAR DESCRIÇÕES DAS HABILIDADES EM PORTUGUÊS
-    async function loadAbilityDescriptionsPT(abilities) {
-        for (const ability of abilities) {
-            const abilityName = ability.ability.name;
-            
-            if (!abilityCache.has(abilityName)) {
-                try {
-                    const response = await fetch(ability.ability.url);
-                    const data = await response.json();
-                    
-                    // 1. Tentar obter descrição em português do Brasil
-                    let ptDescription = null;
-                    
-                    // Primeiro tentar effect_entries em português
-                    if (data.effect_entries) {
-                        const ptEffect = data.effect_entries.find(e => e.language.name === 'pt-BR');
-                        if (ptEffect && ptEffect.effect) {
-                            ptDescription = ptEffect.effect;
-                        }
+    // CARREGAR DESCRIÇÕES DAS HABILIDADES EM PORTUGUÊS - VERSÃO CORRIGIDA
+   // CARREGAR DESCRIÇÕES DAS HABILIDADES EM PORTUGUÊS - VERSÃO FINAL CORRIGIDA
+async function loadAbilityDescriptionsPT(abilities) {
+    for (const ability of abilities) {
+        const abilityName = ability.ability.name;
+        
+        if (!abilityCache.has(abilityName)) {
+            try {
+                const response = await fetch(ability.ability.url);
+                const data = await response.json();
+                
+                // 1. Tentar obter descrição em português do Brasil
+                let finalDescription = null;
+                let hasPortuguese = true;
+                
+                // Primeiro tentar effect_entries em português
+                if (data.effect_entries) {
+                    const ptEffect = data.effect_entries.find(e => e.language.name === 'pt-BR');
+                    if (ptEffect && ptEffect.effect) {
+                        finalDescription = ptEffect.effect;
                     }
-                    
-                    // Se não encontrou, tentar flavor_text_entries em português
-                    if (!ptDescription && data.flavor_text_entries) {
-                        const ptFlavor = data.flavor_text_entries.find(f => f.language.name === 'pt-BR');
-                        if (ptFlavor && ptFlavor.flavor_text) {
-                            ptDescription = ptFlavor.flavor_text;
-                        }
-                    }
-                    
-                    // 2. Fallback para inglês se não tiver português
-                    if (!ptDescription) {
-                        if (data.effect_entries) {
-                            const enEffect = data.effect_entries.find(e => e.language.name === 'en');
-                            if (enEffect && enEffect.effect) {
-                                ptDescription = enEffect.effect;
-                            }
-                        }
-                        
-                        if (!ptDescription && data.flavor_text_entries) {
-                            const enFlavor = data.flavor_text_entries.find(f => f.language.name === 'en');
-                            if (enFlavor && enFlavor.flavor_text) {
-                                ptDescription = enFlavor.flavor_text;
-                            }
-                        }
-                    }
-                    
-                    // 3. Último fallback
-                    if (!ptDescription) {
-                        ptDescription = 'Descrição não disponível para esta habilidade.';
-                    }
-                    
-                    // Processar nome da habilidade (primeira letra maiúscula)
-                    const formattedName = abilityName
-                        .split('-')
-                        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                        .join(' ');
-                    
-                    // Salvar no cache
-                    abilityCache.set(abilityName, {
-                        name: formattedName,
-                        description: ptDescription,
-                        isHidden: ability.is_hidden
-                    });
-                    
-                } catch (error) {
-                    console.warn(`Erro ao carregar habilidade ${abilityName}:`, error);
-                    
-                    // Fallback básico
-                    const formattedName = abilityName
-                        .split('-')
-                        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                        .join(' ');
-                    
-                    abilityCache.set(abilityName, {
-                        name: formattedName,
-                        description: 'Erro ao carregar descrição. Tente novamente.',
-                        isHidden: ability.is_hidden
-                    });
                 }
+                
+                // Se não encontrou, tentar flavor_text_entries em português
+                if (!finalDescription && data.flavor_text_entries) {
+                    const ptFlavor = data.flavor_text_entries.find(f => f.language.name === 'pt-BR');
+                    if (ptFlavor && ptFlavor.flavor_text) {
+                        finalDescription = ptFlavor.flavor_text;
+                    }
+                }
+                
+                // 2. Se não tem português, buscar em inglês
+                if (!finalDescription) {
+                    hasPortuguese = false;
+                    
+                    // Primeiro tentar effect_entries em inglês
+                    if (data.effect_entries) {
+                        const enEffect = data.effect_entries.find(e => e.language.name === 'en');
+                        if (enEffect && enEffect.effect) {
+                            finalDescription = enEffect.effect;
+                        }
+                    }
+                    
+                    // Se não encontrou, tentar flavor_text_entries em inglês
+                    if (!finalDescription && data.flavor_text_entries) {
+                        const enFlavor = data.flavor_text_entries.find(f => f.language.name === 'en');
+                        if (enFlavor && enFlavor.flavor_text) {
+                            finalDescription = enFlavor.flavor_text;
+                        }
+                    }
+                    
+                    // 3. Se não tem nem português nem inglês
+                    if (!finalDescription) {
+                        finalDescription = 'Descrição não disponível na PokeAPI.';
+                    }
+                }
+                
+                // Processar nome da habilidade (primeira letra maiúscula)
+                const formattedName = abilityName
+                    .split('-')
+                    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                    .join(' ');
+                
+                // Salvar no cache
+                abilityCache.set(abilityName, {
+                    name: formattedName,
+                    description: finalDescription, // ✅ AGORA TEM A DESCRIÇÃO REAL
+                    isHidden: ability.is_hidden,
+                    hasPortuguese: hasPortuguese
+                });
+                
+                console.log(`✅ Habilidade: ${formattedName}`, hasPortuguese ? '(PT-BR)' : '(EN)');
+                
+            } catch (error) {
+                console.warn(`Erro ao carregar habilidade ${abilityName}:`, error);
+                
+                // Fallback básico
+                const formattedName = abilityName
+                    .split('-')
+                    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                    .join(' ');
+                
+                abilityCache.set(abilityName, {
+                    name: formattedName,
+                    description: 'Erro ao carregar descrição. Tente novamente.',
+                    isHidden: ability.is_hidden,
+                    hasPortuguese: false
+                });
             }
         }
     }
+}
 
     function renderPokemonDetailPage(pokemon, speciesData, typeData) {
         const displayName = usePortuguese ? pokemon.namePT : formatName(pokemon.name);
@@ -1631,6 +1910,9 @@
                             ${abilityInfo.name}
                             ${abilityInfo.isHidden ? 
                                 '<span class="ability-hidden">Habilidade Oculta</span>' : 
+                                ''}
+                            ${abilityInfo.hasPortuguese === false ? 
+                                '<span style="margin-left: 8px; color: #ff9800; font-size: 0.8rem; background: rgba(255,152,0,0.1); padding: 2px 8px; border-radius: 10px; border: 1px solid #ff9800;"><i class="fas fa-language"></i> Somente EN</span>' : 
                                 ''}
                         </div>
                         <div class="ability-description">
