@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokédex Pro Max</title>
+    <title>Pokéd3x </title>
     <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -13,6 +13,7 @@
             --primary-dark: #388E3C;
             --secondary: #2196F3;
             --accent: #FF9800;
+            --accent-purple: #9C27B0;
             --dark: #1a1a2e;
             --dark-card: #16213e;
             --light: #f8f9fa;
@@ -36,6 +37,7 @@
             color: var(--light);
             min-height: 100vh;
             padding: 20px;
+            overflow-x: hidden;
         }
         
         .container {
@@ -43,7 +45,7 @@
             margin: 0 auto;
         }
         
-        /* HEADER SIMPLIFICADO - SEM IMAGENS PROBLEMÁTICAS */
+        /* HEADER */
         header {
             text-align: center;
             padding: 30px 20px;
@@ -64,7 +66,7 @@
         .header-title {
             font-family: 'Oxanium', monospace;
             font-size: 3.5rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent-purple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -80,10 +82,6 @@
         .header-title:hover {
             transform: scale(1.05);
             text-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
         
         .subtitle {
@@ -94,7 +92,7 @@
             line-height: 1.6;
         }
         
-        /* === BARRA DE PESQUISA MELHORADA === */
+        /* BARRA DE PESQUISA */
         .search-section {
             background: rgba(26, 26, 46, 0.8);
             border-radius: 15px;
@@ -152,13 +150,7 @@
             outline: none;
         }
         
-        .type-filter option {
-            background: var(--dark-card);
-            color: var(--light);
-            padding: 10px;
-        }
-        
-        /* === GRADE DE POKÉMON COM ESTATÍSTICAS === */
+        /* LISTA DE POKÉMON */
         .pokemon-list {
             background: rgba(26, 26, 46, 0.8);
             border-radius: 15px;
@@ -246,7 +238,6 @@
             background: rgba(0, 0, 0, 0.2);
             border-radius: 10px;
             padding: 5px;
-            /* Fallback visual se imagem não carregar */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -293,7 +284,7 @@
         .spdef-stat { color: #ec4899; }
         .speed-stat { color: #3498db; }
         
-        /* === PAGINAÇÃO CORRIGIDA === */
+        /* PAGINAÇÃO */
         .pagination {
             display: flex;
             justify-content: center;
@@ -325,7 +316,7 @@
             box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
         }
         
-        /* === MODAL DETALHES - REPAGINADO === */
+        /* MODAL DETALHES - COMPACTO */
         .modal {
             display: none;
             position: fixed;
@@ -336,33 +327,35 @@
             background: rgba(0, 0, 0, 0.95);
             z-index: 1000;
             overflow-y: auto;
-            padding: 20px;
+            padding: 10px;
         }
         
         .modal-content {
-            max-width: 1200px;
-            margin: 40px auto;
+            max-width: 1000px;
+            margin: 20px auto;
             background: var(--dark-card);
-            border-radius: 25px;
-            padding: 40px;
+            border-radius: 20px;
+            padding: 25px;
             position: relative;
             border: 2px solid var(--primary);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
         }
         
         .close-modal {
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 15px;
+            right: 15px;
             background: #ff4757;
             color: white;
             border: none;
-            padding: 12px 18px;
-            border-radius: 10px;
+            padding: 10px 15px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             transition: all 0.3s;
+            z-index: 10;
         }
         
         .close-modal:hover {
@@ -373,8 +366,8 @@
         .modal-body {
             display: grid;
             grid-template-columns: 300px 1fr;
-            gap: 40px;
-            min-height: 600px;
+            gap: 25px;
+            min-height: auto;
         }
         
         @media (max-width: 900px) {
@@ -383,196 +376,194 @@
             }
         }
         
-        /* COLUNA ESQUERDA - IMAGEM E INFO BÁSICA */
+        /* COLUNA ESQUERDA - COMPACTA */
         .modal-left {
             background: linear-gradient(135deg, rgba(26, 26, 46, 0.9), rgba(42, 42, 62, 0.9));
-            border-radius: 20px;
-            padding: 30px;
+            border-radius: 15px;
+            padding: 20px;
             text-align: center;
             border: 2px solid rgba(76, 175, 80, 0.3);
             display: flex;
             flex-direction: column;
             align-items: center;
+            height: fit-content;
         }
         
         .pokemon-detail-image {
-            width: 250px;
-            height: 250px;
+            width: 220px;
+            height: 220px;
             object-fit: contain;
-            margin-bottom: 25px;
-            filter: drop-shadow(0 8px 16px rgba(0,0,0,0.3));
+            margin-bottom: 20px;
+            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.3));
         }
         
         .detail-title {
             font-family: 'Oxanium', monospace;
-            font-size: 2.2rem;
-            margin-bottom: 10px;
+            font-size: 2rem;
+            margin-bottom: 8px;
             color: var(--light);
         }
         
         .detail-number {
             color: var(--gray);
-            font-size: 1.2rem;
-            margin-bottom: 20px;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
         }
         
         .detail-types {
             display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
+            gap: 8px;
+            margin-bottom: 20px;
             justify-content: center;
+            flex-wrap: wrap;
         }
         
-        /* === GRÁFICO DE FRAQUEZAS === */
+        /* DADOS DA POKÉDEX - ABAIXO DO GRÁFICO */
+        .pokedex-data {
+            width: 100%;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .pokedex-data-title {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .pokedex-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .pokedex-item {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .pokedex-label {
+            color: var(--gray);
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+            display: block;
+        }
+        
+        .pokedex-value {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--light);
+        }
+        
+        /* GRÁFICO DE FRAQUEZAS */
         .weakness-chart-container {
             width: 100%;
-            margin-top: 30px;
+            margin-top: 20px;
         }
         
         .weakness-title {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--primary);
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             text-align: center;
             font-weight: 600;
         }
         
         .weakness-chart-wrapper {
             width: 100%;
-            height: 200px;
+            height: 180px;
             position: relative;
         }
         
-        /* === TYPE EFFECTIVENESS GRID === */
-        .effectiveness-container {
-            margin-top: 20px;
-            width: 100%;
-        }
-        
-        .effectiveness-title {
-            font-size: 1rem;
-            color: var(--gray);
-            margin-bottom: 10px;
-            text-align: center;
-        }
-        
-        .effectiveness-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-        }
-        
-        .effectiveness-item {
-            padding: 8px;
-            border-radius: 8px;
-            text-align: center;
-            font-size: 0.8rem;
-            font-weight: 600;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .effectiveness-item .multiplier {
-            font-size: 0.9rem;
-            font-weight: bold;
-            margin-top: 3px;
-        }
-        
-        .multiplier-4 { background: rgba(255, 0, 0, 0.3); color: #ff6b6b; }
-        .multiplier-2 { background: rgba(255, 100, 100, 0.3); color: #ff9999; }
-        .multiplier-1 { background: rgba(150, 150, 150, 0.2); color: #cccccc; }
-        .multiplier-0_5 { background: rgba(100, 200, 100, 0.3); color: #88ff88; }
-        .multiplier-0_25 { background: rgba(0, 200, 0, 0.3); color: #64ff64; }
-        .multiplier-0 { background: rgba(100, 100, 100, 0.3); color: #aaaaaa; }
-        
-        /* COLUNA DIREITA - DETALHES COMPLETOS */
+        /* COLUNA DIREITA - COMPACTA */
         .modal-right {
             display: flex;
             flex-direction: column;
-            gap: 30px;
+            gap: 20px;
+            max-height: 700px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+        
+        .modal-right::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .modal-right::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 3px;
+        }
+        
+        .modal-right::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 3px;
         }
         
         .detail-section {
             background: rgba(26, 26, 46, 0.8);
-            border-radius: 15px;
-            padding: 25px;
+            border-radius: 12px;
+            padding: 20px;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .section-title {
             font-family: 'Oxanium', monospace;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: var(--primary);
-            margin-bottom: 20px;
-            padding-bottom: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
             border-bottom: 2px solid rgba(76, 175, 80, 0.3);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
         
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
-        
-        .info-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .info-label {
-            color: var(--gray);
-            font-size: 0.95rem;
-        }
-        
-        .info-value {
-            font-weight: 600;
-            text-align: right;
-        }
-        
-        /* ABILITIES CORRIGIDAS - DESCRIÇÃO EM PORTUGUÊS */
+        /* HABILIDADES */
         .ability-item {
             background: rgba(0, 0, 0, 0.3);
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 12px;
             border-left: 4px solid var(--secondary);
         }
         
         .ability-name {
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: var(--secondary);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            font-size: 0.95rem;
         }
         
         .ability-description {
             color: var(--gray);
-            font-size: 0.9rem;
-            line-height: 1.5;
+            font-size: 0.85rem;
+            line-height: 1.4;
         }
         
         .ability-hidden {
             color: var(--accent);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             margin-left: auto;
             background: rgba(255, 152, 0, 0.1);
-            padding: 2px 8px;
-            border-radius: 10px;
+            padding: 2px 6px;
+            border-radius: 8px;
             border: 1px solid var(--accent);
         }
         
-        /* BASE STATS COM GRÁFICO */
+        /* BASE STATS */
         .stats-container {
             display: grid;
-            grid-template-columns: 1fr 300px;
-            gap: 30px;
+            grid-template-columns: 1fr 250px;
+            gap: 20px;
             align-items: start;
         }
         
@@ -585,77 +576,224 @@
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
+            gap: 12px;
         }
         
         .stat-box {
             background: rgba(0, 0, 0, 0.3);
-            padding: 15px;
-            border-radius: 10px;
+            padding: 12px;
+            border-radius: 8px;
             text-align: center;
         }
         
         .stat-name {
             color: var(--gray);
-            font-size: 0.9rem;
-            margin-bottom: 8px;
+            font-size: 0.85rem;
+            margin-bottom: 6px;
         }
         
         .stat-value {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
         }
         
-        .stat-range {
-            font-size: 0.8rem;
+        /* MOVES/ATAQUES */
+        .moves-section {
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 8px;
+        }
+        
+        .moves-section::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .moves-section::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 3px;
+        }
+        
+        .moves-section::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 3px;
+        }
+        
+        .move-item {
+            display: grid;
+            grid-template-columns: 1fr 70px 50px 50px 50px;
+            gap: 10px;
+            padding: 10px 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            align-items: center;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .move-item {
+                grid-template-columns: 1fr 60px 45px 45px 45px;
+                font-size: 0.85rem;
+                gap: 8px;
+                padding: 8px 6px;
+            }
+        }
+        
+        .move-item:hover {
+            background: rgba(76, 175, 80, 0.1);
+            border-radius: 6px;
+        }
+        
+        .move-type-tag {
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: white;
+            text-align: center;
+            min-width: 70px;
+        }
+        
+        .move-power {
+            text-align: center;
+            font-weight: 600;
+            color: #ff6b6b;
+        }
+        
+        .move-accuracy {
+            text-align: center;
+            font-weight: 600;
+            color: #3498db;
+        }
+        
+        .move-pp {
+            text-align: center;
+            font-weight: 600;
+            color: #2ecc71;
+        }
+        
+        .move-learn-method {
+            font-size: 0.75rem;
             color: var(--gray);
+            margin-top: 3px;
         }
         
-        /* EVOLUTION CHART */
-        .evolution-container {
+        /* FILTRO DE MOVES */
+        .moves-filter {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .move-filter-btn {
+            padding: 6px 12px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            color: var(--light);
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+        
+        .move-filter-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .move-filter-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* GRÁFICO DE MOVES */
+        .moves-chart-wrapper {
+            width: 100%;
+            height: 180px;
+            margin-top: 15px;
+        }
+        
+        /* EVOLUÇÕES */
+        .evolution-chart {
             display: flex;
             justify-content: center;
+            align-items: center;
             flex-wrap: wrap;
-            gap: 30px;
-            margin-top: 20px;
+            gap: 20px;
+            margin-top: 15px;
         }
         
-        .evolution-item {
+        .evolution-chain {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .evolution-step {
             text-align: center;
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: all 0.3s;
+            position: relative;
         }
         
-        .evolution-item:hover {
-            transform: translateY(-5px);
+        .evolution-step:hover {
+            transform: translateY(-8px);
         }
         
         .evo-image {
             width: 80px;
             height: 80px;
             object-fit: contain;
-            margin-bottom: 10px;
             background: rgba(0, 0, 0, 0.3);
             border-radius: 50%;
-            padding: 10px;
+            padding: 12px;
+            margin-bottom: 8px;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .evolution-step:hover .evo-image {
+            transform: scale(1.1);
+            border-color: var(--primary);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
         
         .evo-name {
             font-weight: 600;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
             color: var(--light);
+            font-size: 0.95rem;
         }
         
         .evo-condition {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--accent);
+            background: rgba(255, 152, 0, 0.1);
+            padding: 3px 8px;
+            border-radius: 10px;
+            margin-top: 3px;
+            display: inline-block;
+        }
+        
+        .evolution-arrow {
+            font-size: 1.5rem;
+            color: var(--primary);
+            opacity: 0.7;
+        }
+        
+        /* GRÁFICO DE EVOLUÇÃO */
+        .evolution-stats-chart {
+            width: 100%;
+            height: 200px;
+            margin-top: 20px;
         }
         
         /* LOADING */
         .loading {
             text-align: center;
-            padding: 60px;
+            padding: 50px;
             color: var(--gray);
         }
         
@@ -674,16 +812,146 @@
             100% { transform: rotate(360deg); }
         }
         
+        /* ==================== ASSINATURA JEAN LUCAS ==================== */
+        .dev-signature {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0 20px;
+            padding: 25px;
+            background: rgba(26, 26, 46, 0.9);
+            border-radius: 20px;
+            border: 2px solid rgba(149, 0, 255, 0.3);
+            max-width: 800px;
+            margin: 40px auto 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .dev-signature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, 
+                #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, 
+                #feca57, #ff9ff3, #54a0ff, #5f27cd);
+            background-size: 300% 100%;
+            animation: rainbow 3s linear infinite;
+        }
+        
+        @keyframes rainbow {
+            0% { background-position: 300% 0; }
+            100% { background-position: -300% 0; }
+        }
+        
+        .gengar-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #705898, #a890f0, #ff9ff3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+            box-shadow: 0 8px 25px rgba(112, 88, 152, 0.4);
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .gengar-icon::after {
+            content: '👻';
+            position: absolute;
+            font-size: 1.5rem;
+            top: -5px;
+            right: -5px;
+        }
+        
+        .dev-info {
+            text-align: center;
+        }
+        
+        .dev-name {
+            font-family: 'Oxanium', monospace;
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), #9C27B0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+        
+        .dev-title {
+            color: var(--gray);
+            font-size: 1rem;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .dev-links {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .dev-link {
+            color: var(--light);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            padding: 8px 15px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .dev-link:hover {
+            background: rgba(76, 175, 80, 0.2);
+            transform: translateY(-3px);
+            color: var(--primary);
+        }
+        
         /* FOOTER */
         .footer {
             text-align: center;
-            padding: 40px 20px;
+            padding: 30px 20px;
             color: var(--gray);
             font-size: 0.9rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: 50px;
+            margin-top: 30px;
         }
-
+        
+        .tech-tags {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .tech-tag {
+            padding: 6px 12px;
+            background: rgba(76, 175, 80, 0.1);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--primary);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+        }
+        
         /* BOTÃO DE IDIOMA */
         .language-toggle {
             position: fixed;
@@ -692,228 +960,62 @@
             background: rgba(26, 26, 46, 0.9);
             border: 2px solid var(--primary);
             border-radius: 50px;
-            padding: 8px 16px;
+            padding: 10px 20px;
             color: var(--light);
             cursor: pointer;
             font-weight: 600;
             z-index: 100;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
-
+        
         .language-toggle:hover {
             background: var(--primary);
             transform: scale(1.05);
         }
-
-        /* ==================== MOBILE FIXES ==================== */
+        
+        /* RESPONSIVIDADE */
         @media (max-width: 768px) {
-            /* HEADER */
-            header {
-                padding: 20px 15px;
-                margin-bottom: 20px;
-            }
-            
             .header-title {
                 font-size: 2.2rem;
-                padding: 8px 15px;
             }
             
-            .subtitle {
-                font-size: 0.9rem;
-                padding: 0 10px;
-            }
-            
-            /* BARRA DE PESQUISA */
-            .search-section {
-                padding: 15px;
+            .dev-signature {
+                flex-direction: column;
                 gap: 15px;
+                padding: 20px;
+                margin: 30px 10px 15px;
             }
             
-            .search-input, .type-filter {
-                padding: 14px 15px 14px 45px;
-                font-size: 16px;
+            .gengar-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 2rem;
             }
             
-            .search-icon {
-                left: 15px;
+            .dev-name {
+                font-size: 1.8rem;
             }
             
-            /* LISTA DE POKÉMON */
-            .pokemon-list {
-                border-radius: 12px;
+            .dev-links {
+                gap: 10px;
             }
             
-            .list-header {
-                padding: 12px 8px;
-                grid-template-columns: 50px 1fr 60px 60px;
-                font-size: 0.75rem;
-            }
-            
-            .list-header span:nth-child(1) { text-align: center; }
-            .list-header span:nth-child(2) { padding-left: 10px; }
-            .list-header span:nth-child(3),
-            .list-header span:nth-child(4) { text-align: center; }
-            
-            .pokemon-item {
-                grid-template-columns: 50px 1fr 60px 60px;
-                padding: 12px 8px;
-                font-size: 0.85rem;
-            }
-            
-            .pokemon-number {
-                font-size: 0.8rem;
-                text-align: center;
-            }
-            
-            .pokemon-name {
-                font-size: 1rem;
-                padding-left: 10px;
-            }
-            
-            .pokemon-types {
-                flex-wrap: wrap;
-                gap: 4px;
-                margin-top: 8px;
-            }
-            
-            .type-tag {
-                padding: 3px 8px;
-                font-size: 0.7rem;
-            }
-            
-            /* PAGINAÇÃO */
-            .pagination {
-                gap: 6px;
-                margin: 30px 0;
-            }
-            
-            .page-btn {
-                padding: 8px 12px;
-                min-width: 40px;
-                font-size: 0.9rem;
-            }
-            
-            /* MODAL */
-            .modal {
-                padding: 10px;
+            .dev-link {
+                font-size: 0.95rem;
+                padding: 6px 12px;
             }
             
             .modal-content {
-                margin: 20px auto;
-                padding: 20px;
-                border-radius: 20px;
+                padding: 15px;
+                margin: 10px auto;
             }
             
             .modal-body {
-                grid-template-columns: 1fr;
-                gap: 25px;
-            }
-            
-            .modal-left {
-                padding: 20px;
-            }
-            
-            .pokemon-detail-image {
-                width: 200px;
-                height: 200px;
-            }
-            
-            .detail-title {
-                font-size: 1.8rem;
-            }
-            
-            .weakness-chart-wrapper {
-                height: 180px;
-            }
-            
-            /* SEÇÕES DO MODAL */
-            .detail-section {
-                padding: 20px;
-            }
-            
-            .section-title {
-                font-size: 1.3rem;
-                margin-bottom: 15px;
-            }
-            
-            .info-grid {
-                grid-template-columns: 1fr;
-                gap: 10px;
-            }
-            
-            .info-item {
-                padding: 10px 0;
-            }
-            
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
-            }
-            
-            .stat-box {
-                padding: 12px;
-            }
-            
-            .stat-value {
-                font-size: 1.5rem;
-            }
-            
-            /* BOTÕES MAIORES */
-            .close-modal {
-                padding: 10px 15px;
-                font-size: 1.1rem;
-                top: 15px;
-                right: 15px;
-            }
-            
-            .language-toggle {
-                top: 15px;
-                right: 15px;
-                padding: 6px 12px;
-                font-size: 0.9rem;
-            }
-            
-            /* MELHORIAS DE TOUCH */
-            .pokemon-item, .page-btn, .close-modal, .language-toggle {
-                min-height: 44px;
-            }
-            
-            /* EVITA ZOOM EM INPUTS iOS */
-            input, select, textarea {
-                font-size: 16px;
-            }
-        }
-
-        /* ==================== SMALL PHONES ==================== */
-        @media (max-width: 480px) {
-            .header-title {
-                font-size: 1.8rem;
-                letter-spacing: 1px;
-            }
-            
-            .list-header, .pokemon-item {
-                grid-template-columns: 45px 1fr 55px 55px;
-            }
-            
-            .pokemon-stat {
-                font-size: 0.8rem;
-            }
-            
-            .pagination {
-                gap: 4px;
-            }
-            
-            .page-btn {
-                padding: 6px 10px;
-                min-width: 36px;
-                font-size: 0.85rem;
-            }
-            
-            .modal-content {
-                padding: 15px;
+                gap: 15px;
             }
             
             .pokemon-detail-image {
@@ -925,50 +1027,59 @@
                 font-size: 1.6rem;
             }
             
-            .stats-grid {
+            .pokedex-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .stats-container {
                 grid-template-columns: 1fr;
             }
+            
+            .moves-chart-wrapper,
+            .evolution-stats-chart {
+                height: 150px;
+            }
+            
+            .evo-image {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .evolution-chain {
+                gap: 10px;
+            }
+            
+            .evolution-arrow {
+                font-size: 1.2rem;
+            }
         }
-
-        /* ==================== TABLETS ==================== */
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .container {
+        
+        @media (max-width: 480px) {
+            .header-title {
+                font-size: 1.8rem;
+            }
+            
+            .search-section {
                 padding: 15px;
             }
             
-            .header-title {
-                font-size: 3rem;
+            .search-input,
+            .type-filter {
+                padding: 12px 15px 12px 40px;
             }
             
-            .list-header {
-                grid-template-columns: 60px 120px 1fr repeat(3, 80px);
+            .modal-body {
+                gap: 10px;
             }
             
-            .pokemon-item {
-                grid-template-columns: 60px 120px 1fr repeat(3, 80px);
+            .evolution-chain {
+                flex-direction: column;
             }
-        }
-
-        /* ==================== MELHORIAS GERAIS TOUCH ==================== */
-        button, 
-        .pokemon-item, 
-        .page-btn, 
-        .evolution-item {
-            cursor: pointer;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body {
-            -webkit-overflow-scrolling: touch;
-        }
-
-        * {
-            -webkit-tap-highlight-color: rgba(0,0,0,0);
-        }
-
-        .pokemon-item, .page-btn, .type-tag {
-            will-change: transform;
-            transform: translateZ(0);
+            
+            .evolution-arrow {
+                transform: rotate(90deg);
+            }
         }
         
         /* TYPE COLORS */
@@ -1000,13 +1111,13 @@
     </div>
 
     <div class="container">
-        <!-- HEADER SIMPLIFICADO -->
+        <!-- HEADER -->
         <header>
             <div class="header-content">
                 <h1 class="header-title" id="homeButton">
                     POKÉDEX PRO MAX
                 </h1>
-                <p class="subtitle">1025 Pokémon • Dados Reais • Nomes em Português</p>
+                <p class="subtitle">1025 Pokémon • Dados Reais • Jean Lucas Edition</p>
             </div>
         </header>
         
@@ -1046,7 +1157,7 @@
             </select>
         </section>
         
-        <!-- LISTA DE POKÉMON COM ESTATÍSTICAS -->
+        <!-- LISTA DE POKÉMON -->
         <section class="pokemon-list">
             <div class="list-header">
                 <span>#</span>
@@ -1072,17 +1183,39 @@
         <!-- PAGINAÇÃO -->
         <div class="pagination" id="pagination"></div>
         
+        <!-- ASSINATURA JEAN LUCAS -->
+        <div class="dev-signature">
+            <div class="gengar-icon">
+                <i class="fas fa-ghost"></i>
+            </div>
+            <div class="dev-info">
+                <div class="dev-name">JEAN LUCAS</div>
+                <div class="dev-title">Full Stack Developer & Pokémon Master</div>
+                <div class="dev-links">
+                    <a href="https://github.com/D3xnav" target="_blank" class="dev-link">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                    <a href="https://www.instagram.com/jean_lucas013/" target="_blank" class="dev-link">
+                        <i class="fab fa-instagram"></i> Instagram
+                    </a>
+                    <a href="#contact" class="dev-link" onclick="alert('Projeto Pokédex Pro Max por Jean Lucas! 🎮')">
+                        <i class="fas fa-code"></i> Projeto
+                    </a>
+                </div>
+            </div>
+        </div>
+        
         <!-- MODAL DE DETALHES -->
         <div class="modal" id="pokemonModal">
             <div class="modal-content">
                 <button class="close-modal" id="closeModal">&times;</button>
                 <div class="modal-body">
-                    <!-- COLUNA ESQUERDA (Imagem e info básica) -->
+                    <!-- COLUNA ESQUERDA -->
                     <div class="modal-left" id="modalLeft">
                         <!-- Será preenchido por JavaScript -->
                     </div>
                     
-                    <!-- COLUNA DIREITA (Detalhes completos) -->
+                    <!-- COLUNA DIREITA -->
                     <div class="modal-right" id="modalRight">
                         <!-- Será preenchido por JavaScript -->
                     </div>
@@ -1092,9 +1225,17 @@
         
         <!-- FOOTER -->
         <footer class="footer">
-            <p>Pokédex Pro Max v3.0 • Dados da PokeAPI • Pokémon © Nintendo</p>
-            <p style="margin-top: 10px; font-size: 0.8rem; opacity: 0.7;">
-                Descrições em Português • Fraquezas Reais • Projeto não comercial
+            <p>Pokédex Pro Max v4.0 • Jean Lucas Edition • Dados da PokeAPI • Pokémon © Nintendo</p>
+            <div class="tech-tags">
+                <span class="tech-tag">HTML5</span>
+                <span class="tech-tag">CSS3</span>
+                <span class="tech-tag">JavaScript</span>
+                <span class="tech-tag">Chart.js</span>
+                <span class="tech-tag">PokeAPI</span>
+                <span class="tech-tag">Responsive Design</span>
+            </div>
+            <p style="margin-top: 15px; font-size: 0.8rem; opacity: 0.7;">
+                Moves/Ataques • Evoluções • Fraquezas Reais • Descrições em Português
             </p>
         </footer>
     </div>
@@ -1110,6 +1251,8 @@
     const speciesCache = new Map();
     const abilityCache = new Map();
     const typeCache = new Map();
+    const moveCache = new Map();
+    const evolutionCache = new Map();
     
     let allPokemon = [];
     let filteredPokemon = [];
@@ -1118,6 +1261,8 @@
     let currentSearchTerm = '';
     let statsChart = null;
     let weaknessChart = null;
+    let movesChart = null;
+    let evolutionChart = null;
     let isLoadingDetails = false;
     let loadedCount = 0;
     let usePortuguese = true;
@@ -1133,7 +1278,7 @@
 
     // ==================== INICIALIZAÇÃO ====================
     document.addEventListener('DOMContentLoaded', function() {
-        console.log("🚀 Iniciando Pokédex Pro Max...");
+        console.log("🚀 Iniciando Pokédex Pro Max - Jean Lucas Edition...");
         
         // Configurar botão de idioma
         document.getElementById('languageToggle').addEventListener('click', toggleLanguage);
@@ -1147,21 +1292,14 @@
 
     // ==================== FUNÇÃO HOME ====================
     function goToHome() {
-        // Voltar para primeira página
         currentPage = 1;
-        
-        // Limpar filtros
         currentSearchTerm = '';
         currentTypeFilter = 'all';
         
-        // Resetar inputs
         document.getElementById('searchInput').value = '';
         document.getElementById('typeFilter').value = 'all';
         
-        // Aplicar filtros e renderizar
         applyFilters();
-        
-        // Scroll para topo
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -1190,21 +1328,17 @@
         updateLoadingText("Carregando Pokémon...");
         
         try {
-            // CARREGAR OS PRIMEIROS 50 POKÉMON IMEDIATAMENTE
             const initialLoad = [];
             const initialCount = Math.min(50, POKEMON_COUNT);
             
             updateLoadingText(`Carregando ${initialCount} Pokémon...`);
             
-            // Carregar Pokémon em paralelo
             const promises = [];
             for (let i = 1; i <= initialCount; i++) {
                 promises.push(loadSinglePokemon(i));
             }
             
             const results = await Promise.all(promises);
-            
-            // Adicionar Pokémon carregados
             initialLoad.push(...results.filter(p => p !== null));
             
             // Criar placeholders para o restante
@@ -1227,11 +1361,9 @@
             allPokemon = initialLoad;
             filteredPokemon = [...allPokemon];
             
-            // Mostrar lista imediatamente
             renderPokemonList();
             setupPagination();
             
-            // Carregar o restante em background
             loadPokemonDetailsInBatches(initialCount);
             
         } catch (error) {
@@ -1240,20 +1372,16 @@
         }
     }
 
-    // Carregar um único Pokémon com todos os dados
     async function loadSinglePokemon(id) {
         try {
-            // Buscar dados básicos
             const pokemonResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
             if (!pokemonResponse.ok) return null;
             const pokemonData = await pokemonResponse.json();
             
-            // Buscar dados da espécie em paralelo
             const speciesResponse = fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`)
                 .then(r => r.ok ? r.json() : null)
                 .catch(() => null);
             
-            // Processar dados básicos
             const totalStats = pokemonData.stats.reduce((sum, stat) => sum + stat.base_stat, 0);
             
             const pokemon = {
@@ -1261,7 +1389,6 @@
                 name: pokemonData.name,
                 namePT: formatName(pokemonData.name),
                 types: pokemonData.types.map(t => t.type.name),
-                // SPRITE SIMPLES QUE SEMPRE FUNCIONA
                 sprite: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`,
                 stats: {
                     hp: pokemonData.stats[0].base_stat,
@@ -1275,11 +1402,11 @@
                 height: pokemonData.height / 10,
                 weight: pokemonData.weight / 10,
                 abilities: pokemonData.abilities,
+                moves: pokemonData.moves || [],
                 isLoaded: true,
                 speciesData: null
             };
             
-            // Adicionar nome em português se disponível
             const speciesData = await speciesResponse;
             if (speciesData) {
                 const ptName = speciesData.names?.find(name => name.language.name === 'pt-BR');
@@ -1297,80 +1424,6 @@
             console.warn(`⚠️ Erro ao carregar Pokémon ${id}:`, error);
             return null;
         }
-    }
-
-    // Carregar detalhes em batches
-    async function loadPokemonDetailsInBatches(startFrom = 0) {
-        if (isLoadingDetails) return;
-        isLoadingDetails = true;
-        
-        const totalBatches = Math.ceil((POKEMON_COUNT - startFrom) / BATCH_SIZE);
-        const loadingText = document.querySelector('.loading p');
-        
-        for (let batch = 0; batch < totalBatches; batch++) {
-            const start = startFrom + (batch * BATCH_SIZE);
-            const end = Math.min(start + BATCH_SIZE, POKEMON_COUNT);
-            
-            const promises = [];
-            for (let i = start; i < end; i++) {
-                if (!allPokemon[i] || !allPokemon[i].isLoaded) {
-                    promises.push(loadSinglePokemon(i + 1));
-                }
-            }
-            
-            await Promise.all(promises);
-            loadedCount = end;
-            
-            // Atualizar progresso
-            if (loadingText) {
-                const percent = Math.round((loadedCount / POKEMON_COUNT) * 100);
-                loadingText.textContent = `Carregando detalhes... ${loadedCount}/${POKEMON_COUNT} (${percent}%)`;
-            }
-            
-            // Atualizar lista visível
-            if ((batch + 1) % 2 === 0 || batch === totalBatches - 1) {
-                updateAllPokemonFromCache();
-                updateVisiblePokemon();
-            }
-            
-            await new Promise(resolve => setTimeout(resolve, 100));
-        }
-        
-        console.log(`✅ ${loadedCount} Pokémon carregados!`);
-        isLoadingDetails = false;
-        
-        if (loadingText) {
-            loadingText.textContent = "Pronto! Todos os Pokémon foram carregados.";
-            setTimeout(() => {
-                const container = document.getElementById('pokemonListContainer');
-                if (container.querySelector('.loading')) {
-                    renderPokemonList();
-                }
-            }, 1500);
-        }
-    }
-
-    // Atualizar array allPokemon com dados do cache
-    function updateAllPokemonFromCache() {
-        for (let i = 0; i < allPokemon.length; i++) {
-            const pokemonId = i + 1;
-            const cachedPokemon = pokemonCache.get(pokemonId);
-            if (cachedPokemon) {
-                allPokemon[i] = cachedPokemon;
-            }
-        }
-        
-        filteredPokemon = [...allPokemon];
-        applyFilters();
-    }
-
-    // Função auxiliar para formatar nome
-    function formatName(name) {
-        return name
-            .split('-')
-            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(' ')
-            .replace('Pokemon', 'Pokémon');
     }
 
     // ==================== FUNÇÕES PRINCIPAIS ====================
@@ -1398,7 +1451,6 @@
                 (usePortuguese ? pokemon.namePT : formatName(pokemon.name)) : 
                 'Carregando...';
             
-            // Mostrar placeholder para stats se não carregado
             const stats = pokemon.isLoaded ? pokemon.stats : {
                 total: '...', hp: '...', attack: '...', defense: '...',
                 specialAttack: '...', specialDefense: '...', speed: '...'
@@ -1443,62 +1495,881 @@
         container.innerHTML = html;
     }
 
-    function setupPagination() {
-        const pagination = document.getElementById('pagination');
-        const totalPages = Math.ceil(filteredPokemon.length / ITEMS_PER_PAGE);
+    // ==================== DETALHES DO POKÉMON ====================
+    async function openPokemonDetail(pokemonId) {
+        document.getElementById('pokemonModal').dataset.currentPokemonId = pokemonId;
         
-        if (totalPages <= 1) {
-            pagination.innerHTML = '';
+        let pokemon = pokemonCache.get(pokemonId);
+        
+        if (!pokemon) {
+            pokemon = await loadSinglePokemon(pokemonId);
+            if (!pokemon) {
+                alert("Não foi possível carregar os detalhes deste Pokémon.");
+                return;
+            }
+        }
+        
+        // Mostrar loading
+        document.getElementById('modalLeft').innerHTML = `
+            <div class="loading">
+                <div class="loading-spinner"></div>
+                <p>Carregando detalhes...</p>
+            </div>
+        `;
+        document.getElementById('modalRight').innerHTML = '';
+        
+        document.getElementById('pokemonModal').style.display = 'block';
+        document.body.style.overflow = 'hidden';
+        
+        try {
+            // Carregar dados em paralelo
+            const [speciesData, typeData, movesData, evolutionData] = await Promise.all([
+                pokemon.speciesData ? Promise.resolve(pokemon.speciesData) : 
+                    fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonId}/`).then(r => r.ok ? r.json() : null),
+                loadTypeData(pokemon.types),
+                loadMovesData(pokemon.moves),
+                loadEvolutionData(pokemonId)
+            ]);
+            
+            await loadAbilityDescriptionsPT(pokemon.abilities);
+            
+            renderPokemonDetailPage(pokemon, speciesData, typeData, movesData, evolutionData);
+            
+        } catch (error) {
+            console.error('Erro ao carregar detalhes:', error);
+            renderBasicPokemonDetail(pokemon);
+        }
+    }
+
+    // ==================== RENDERIZAÇÃO COMPACTA ====================
+    async function renderPokemonDetailPage(pokemon, speciesData, typeData, movesData, evolutionData) {
+        const displayName = usePortuguese ? pokemon.namePT : formatName(pokemon.name);
+        
+        // Calcular fraquezas
+        const weaknesses = calculateWeaknesses(pokemon.types, typeData);
+        
+        // COLUNA ESQUERDA - COMPACTA
+        let leftHtml = `
+            <img class="pokemon-detail-image" 
+                 src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png" 
+                 alt="${displayName}"
+                 onerror="this.src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png'">
+            <h2 class="detail-title">${displayName}</h2>
+            <div class="detail-number">#${pokemon.id.toString().padStart(4, '0')}</div>
+            <div class="detail-types">
+                ${pokemon.types.map(type => `
+                    <span class="type-tag type-${type}">
+                        ${TYPE_MAP[type] || type}
+                    </span>
+                `).join('')}
+            </div>
+            
+            <div class="weakness-chart-container">
+                <div class="weakness-title">Fraquezas</div>
+                <div class="weakness-chart-wrapper">
+                    <canvas id="weaknessChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="pokedex-data">
+                <div class="pokedex-data-title">Dados da Pokédex</div>
+                <div class="pokedex-grid">
+                    <div class="pokedex-item">
+                        <span class="pokedex-label">Número Nacional</span>
+                        <span class="pokedex-value">#${pokemon.id.toString().padStart(4, '0')}</span>
+                    </div>
+                    <div class="pokedex-item">
+                        <span class="pokedex-label">Tipo</span>
+                        <span class="pokedex-value">${pokemon.types.map(t => TYPE_MAP[t]).join(', ')}</span>
+                    </div>
+                    <div class="pokedex-item">
+                        <span class="pokedex-label">Altura</span>
+                        <span class="pokedex-value">${pokemon.height} m</span>
+                    </div>
+                    <div class="pokedex-item">
+                        <span class="pokedex-label">Peso</span>
+                        <span class="pokedex-value">${pokemon.weight} kg</span>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        document.getElementById('modalLeft').innerHTML = leftHtml;
+        renderWeaknessChart(weaknesses);
+        
+        // COLUNA DIREITA - COMPACTA
+        let rightHtml = '';
+        
+        // 1. HABILIDADES
+        if (pokemon.abilities.length > 0) {
+            rightHtml += `
+                <div class="detail-section">
+                    <h3 class="section-title"><i class="fas fa-star"></i> Habilidades</h3>
+            `;
+            
+            pokemon.abilities.forEach(ability => {
+                const abilityInfo = abilityCache.get(ability.ability.name) || {
+                    name: formatName(ability.ability.name),
+                    description: 'Carregando descrição...',
+                    isHidden: ability.is_hidden,
+                    hasPortuguese: true
+                };
+                
+                rightHtml += `
+                    <div class="ability-item">
+                        <div class="ability-name">
+                            <i class="fas fa-bolt"></i>
+                            ${abilityInfo.name}
+                            ${abilityInfo.isHidden ? 
+                                '<span class="ability-hidden">Habilidade Oculta</span>' : 
+                                ''}
+                        </div>
+                        <div class="ability-description">
+                            ${abilityInfo.description}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            rightHtml += `</div>`;
+        }
+        
+        // 2. BASE STATS
+        rightHtml += `
+            <div class="detail-section">
+                <h3 class="section-title"><i class="fas fa-chart-bar"></i> Estatísticas Base</h3>
+                <div class="stats-container">
+                    <div class="stats-grid">
+                        ${Object.entries({
+                            hp: { value: pokemon.stats.hp, label: 'HP', color: '#2ecc71' },
+                            attack: { value: pokemon.stats.attack, label: 'Ataque', color: '#e74c3c' },
+                            defense: { value: pokemon.stats.defense, label: 'Defesa', color: '#f39c12' },
+                            specialAttack: { value: pokemon.stats.specialAttack, label: 'Sp. Atk', color: '#9b59b6' },
+                            specialDefense: { value: pokemon.stats.specialDefense, label: 'Sp. Def', color: '#ec4899' },
+                            speed: { value: pokemon.stats.speed, label: 'Velocidade', color: '#3498db' }
+                        }).map(([key, stat]) => `
+                            <div class="stat-box">
+                                <div class="stat-name">${stat.label}</div>
+                                <div class="stat-value" style="color: ${stat.color}">${pokemon.stats[key]}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div>
+                        <canvas id="statsChart" style="width: 100%; height: 220px;"></canvas>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // 3. MOVES/ATAQUES
+        if (movesData && movesData.length > 0) {
+            rightHtml += `
+                <div class="detail-section">
+                    <h3 class="section-title"><i class="fas fa-fist-raised"></i> Moves/Ataques</h3>
+                    <div class="moves-filter" id="movesFilter">
+                        <button class="move-filter-btn active" data-filter="all">Todos</button>
+                        <button class="move-filter-btn" data-filter="physical">Físico</button>
+                        <button class="move-filter-btn" data-filter="special">Especial</button>
+                        <button class="move-filter-btn" data-filter="status">Status</button>
+                    </div>
+                    <div class="moves-section">
+                        <div class="list-header" style="margin-bottom: 8px; padding: 10px; grid-template-columns: 1fr 70px 50px 50px 50px;">
+                            <span>Nome</span>
+                            <span>Tipo</span>
+                            <span>Poder</span>
+                            <span>Precisão</span>
+                            <span>PP</span>
+                        </div>
+                        ${movesData.map(move => {
+                            const moveName = usePortuguese ? move.namePT : formatName(move.name);
+                            return `
+                                <div class="move-item" data-class="${move.damageClass}">
+                                    <div>
+                                        <div style="font-weight: 600; font-size: 0.9rem;">${moveName}</div>
+                                        <div class="move-learn-method">
+                                            ${move.learnMethod === 'level-up' ? `Nível ${move.learnLevel}` : 
+                                              move.learnMethod === 'machine' ? 'TM/HM' : 
+                                              move.learnMethod === 'tutor' ? 'Tutor' : 
+                                              move.learnMethod === 'egg' ? 'Ovo' : 
+                                              formatName(move.learnMethod)}
+                                        </div>
+                                    </div>
+                                    <span class="move-type-tag type-${move.type}">${TYPE_MAP[move.type] || move.type}</span>
+                                    <span class="move-power">${move.power || '-'}</span>
+                                    <span class="move-accuracy">${move.accuracy || '-'}</span>
+                                    <span class="move-pp">${move.pp}</span>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                    <div class="moves-chart-wrapper">
+                        <canvas id="movesChart"></canvas>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // 4. EVOLUÇÕES
+        if (evolutionData && evolutionData.length > 0) {
+            const evolutionPokemon = new Set();
+            evolutionData.forEach(evo => {
+                evolutionPokemon.add(evo.from);
+                evolutionPokemon.add(evo.to);
+            });
+            
+            const chainPokemon = Array.from(evolutionPokemon);
+            
+            rightHtml += `
+                <div class="detail-section">
+                    <h3 class="section-title"><i class="fas fa-sitemap"></i> Evoluções</h3>
+                    <div class="evolution-chart">
+                        <div class="evolution-chain">
+            `;
+            
+            for (let i = 0; i < chainPokemon.length; i++) {
+                const pokeId = chainPokemon[i];
+                const evolution = evolutionData.find(e => e.to === pokeId);
+                
+                if (i > 0) {
+                    rightHtml += `<div class="evolution-arrow">→</div>`;
+                }
+                
+                rightHtml += `
+                    <div class="evolution-step" onclick="openPokemonDetail(${pokeId})">
+                        <img class="evo-image" 
+                             src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokeId}.png"
+                             alt="Pokémon ${pokeId}"
+                             onerror="this.src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png'">
+                        <div class="evo-name">#${pokeId.toString().padStart(4, '0')}</div>
+                        ${evolution && evolution.details ? `
+                            <div class="evo-condition">
+                                ${getEvolutionConditionText(evolution.details)}
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            }
+            
+            rightHtml += `
+                        </div>
+                    </div>
+                    <div class="evolution-stats-chart">
+                        <canvas id="evolutionChart"></canvas>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // 5. POKÉDEX DESCRIPTION
+        if (speciesData) {
+            let pokedexText = '';
+            if (usePortuguese) {
+                const ptEntry = speciesData.flavor_text_entries?.find(f => f.language.name === 'pt-BR');
+                pokedexText = ptEntry?.flavor_text || 
+                             speciesData.flavor_text_entries?.find(f => f.language.name === 'en')?.flavor_text || 
+                             'Descrição não disponível.';
+            } else {
+                const enEntry = speciesData.flavor_text_entries?.find(f => f.language.name === 'en');
+                pokedexText = enEntry?.flavor_text || 'Description not available.';
+            }
+            
+            pokedexText = pokedexText.replace(/\n/g, ' ').replace(/\f/g, ' ');
+            
+            rightHtml += `
+                <div class="detail-section">
+                    <h3 class="section-title"><i class="fas fa-book"></i> Entrada da Pokédex</h3>
+                    <p style="color: var(--gray); line-height: 1.5; font-style: italic; font-size: 0.9rem;">
+                        "${pokedexText}"
+                    </p>
+                </div>
+            `;
+        }
+        
+        document.getElementById('modalRight').innerHTML = rightHtml;
+        
+        // Renderizar gráficos
+        renderStatsChart(pokemon.stats);
+        
+        if (movesData && movesData.length > 0) {
+            renderMovesChart(movesData);
+            setupMovesFilter();
+        }
+        
+        if (evolutionData && evolutionData.length > 0) {
+            renderEvolutionChart(evolutionData, chainPokemon);
+        }
+    }
+
+    // ==================== FUNÇÕES AUXILIARES ====================
+    function getEvolutionConditionText(details) {
+        if (!details) return 'Evolui';
+        
+        if (details.trigger === 'level-up') {
+            if (details.minLevel) return `Nível ${details.minLevel}`;
+            if (details.minHappiness) return `Felicidade ${details.minHappiness}`;
+            if (details.minBeauty) return `Beleza ${details.minBeauty}`;
+            return 'Nível';
+        }
+        
+        if (details.trigger === 'use-item') {
+            return `Item: ${formatName(details.item)}`;
+        }
+        
+        if (details.trigger === 'trade') {
+            if (details.tradeSpecies) {
+                return `Trocar por ${formatName(details.tradeSpecies)}`;
+            }
+            return 'Trocar';
+        }
+        
+        return formatName(details.trigger);
+    }
+
+    function formatName(name) {
+        return name
+            .split('-')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ')
+            .replace('Pokemon', 'Pokémon');
+    }
+
+    // ==================== FUNÇÕES DE DADOS ====================
+    async function loadMovesData(moves) {
+        const movesData = [];
+        const movePromises = [];
+        
+        // Limitar para 15 moves para performance
+        const movesToLoad = moves.slice(0, 15);
+        
+        for (const moveData of movesToLoad) {
+            const moveName = moveData.move.name;
+            
+            if (moveCache.has(moveName)) {
+                movesData.push(moveCache.get(moveName));
+            } else {
+                movePromises.push(
+                    fetch(moveData.move.url)
+                        .then(r => r.ok ? r.json() : null)
+                        .then(data => {
+                            if (data) {
+                                const move = processMoveData(data, moveData);
+                                moveCache.set(moveName, move);
+                                movesData.push(move);
+                            }
+                        })
+                        .catch(() => null)
+                );
+            }
+        }
+        
+        await Promise.all(movePromises);
+        return movesData.sort((a, b) => b.power - a.power);
+    }
+
+    function processMoveData(moveData, originalData) {
+        let namePT = moveData.names?.find(n => n.language.name === 'pt-BR')?.name;
+        if (!namePT) {
+            namePT = formatName(moveData.name);
+        }
+        
+        let description = moveData.effect_entries?.find(e => e.language.name === 'pt-BR')?.effect;
+        if (!description) {
+            description = moveData.effect_entries?.find(e => e.language.name === 'en')?.effect;
+        }
+        
+        const learnMethod = originalData.version_group_details[0]?.move_learn_method?.name || 'level-up';
+        const learnLevel = originalData.version_group_details[0]?.level_learned_at || 0;
+        
+        return {
+            name: moveData.name,
+            namePT: namePT,
+            type: moveData.type?.name || 'normal',
+            power: moveData.power || 0,
+            accuracy: moveData.accuracy,
+            pp: moveData.pp || 0,
+            damageClass: moveData.damage_class?.name || 'physical',
+            description: description || 'Descrição não disponível.',
+            learnMethod: learnMethod,
+            learnLevel: learnLevel
+        };
+    }
+
+    async function loadEvolutionData(pokemonId) {
+        if (evolutionCache.has(pokemonId)) {
+            return evolutionCache.get(pokemonId);
+        }
+        
+        try {
+            const speciesResponse = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonId}/`);
+            if (!speciesResponse.ok) return null;
+            
+            const speciesData = await speciesResponse.json();
+            const evolutionChainUrl = speciesData.evolution_chain?.url;
+            
+            if (!evolutionChainUrl) return null;
+            
+            const evolutionResponse = await fetch(evolutionChainUrl);
+            if (!evolutionResponse.ok) return null;
+            
+            const evolutionData = await evolutionResponse.json();
+            const evolutionChain = parseEvolutionChain(evolutionData.chain);
+            
+            evolutionCache.set(pokemonId, evolutionChain);
+            return evolutionChain;
+            
+        } catch (error) {
+            console.warn(`Erro ao carregar evolução ${pokemonId}:`, error);
+            return null;
+        }
+    }
+
+    function parseEvolutionChain(chain) {
+        const evolutions = [];
+        
+        function traverseChain(node, fromId = null, details = null) {
+            const speciesId = parseInt(node.species.url.split('/').slice(-2, -1)[0]);
+            
+            if (fromId !== null) {
+                evolutions.push({
+                    from: fromId,
+                    to: speciesId,
+                    details: details
+                });
+            }
+            
+            if (node.evolves_to.length > 0) {
+                node.evolves_to.forEach(nextEvo => {
+                    const trigger = nextEvo.evolution_details[0];
+                    const triggerDetails = {
+                        trigger: trigger?.trigger?.name || 'unknown',
+                        minLevel: trigger?.min_level,
+                        item: trigger?.item?.name,
+                        heldItem: trigger?.held_item?.name,
+                        timeOfDay: trigger?.time_of_day,
+                        minHappiness: trigger?.min_happiness,
+                        minBeauty: trigger?.min_beauty
+                    };
+                    
+                    traverseChain(nextEvo, speciesId, triggerDetails);
+                });
+            }
+        }
+        
+        traverseChain(chain);
+        return evolutions;
+    }
+
+    function calculateWeaknesses(pokemonTypes, typeData) {
+        const weaknesses = {};
+        
+        Object.keys(TYPE_MAP).forEach(type => {
+            weaknesses[type] = 1;
+        });
+        
+        pokemonTypes.forEach(pokemonType => {
+            if (typeData[pokemonType]) {
+                const typeInfo = typeData[pokemonType];
+                
+                if (typeInfo.damage_relations.double_damage_from) {
+                    typeInfo.damage_relations.double_damage_from.forEach(weakType => {
+                        weaknesses[weakType.name] *= 2;
+                    });
+                }
+                
+                if (typeInfo.damage_relations.half_damage_from) {
+                    typeInfo.damage_relations.half_damage_from.forEach(resistType => {
+                        weaknesses[resistType.name] *= 0.5;
+                    });
+                }
+                
+                if (typeInfo.damage_relations.no_damage_from) {
+                    typeInfo.damage_relations.no_damage_from.forEach(immuneType => {
+                        weaknesses[immuneType.name] = 0;
+                    });
+                }
+            }
+        });
+        
+        return weaknesses;
+    }
+
+    async function loadTypeData(pokemonTypes) {
+        const typeData = {};
+        
+        for (const type of pokemonTypes) {
+            if (!typeCache.has(type)) {
+                try {
+                    const response = await fetch(`https://pokeapi.co/api/v2/type/${type}/`);
+                    if (response.ok) {
+                        const data = await response.json();
+                        typeCache.set(type, data);
+                    }
+                } catch (error) {
+                    console.warn(`Erro ao carregar tipo ${type}:`, error);
+                }
+            }
+            
+            if (typeCache.has(type)) {
+                typeData[type] = typeCache.get(type);
+            }
+        }
+        
+        return typeData;
+    }
+
+    async function loadAbilityDescriptionsPT(abilities) {
+        for (const ability of abilities) {
+            const abilityName = ability.ability.name;
+            
+            if (!abilityCache.has(abilityName)) {
+                try {
+                    const response = await fetch(ability.ability.url);
+                    const data = await response.json();
+                    
+                    let description = null;
+                    
+                    if (data.effect_entries) {
+                        const ptEffect = data.effect_entries.find(e => e.language.name === 'pt-BR');
+                        if (ptEffect && ptEffect.effect) {
+                            description = ptEffect.effect;
+                        }
+                    }
+                    
+                    if (!description && data.flavor_text_entries) {
+                        const ptFlavor = data.flavor_text_entries.find(f => f.language.name === 'pt-BR');
+                        if (ptFlavor && ptFlavor.flavor_text) {
+                            description = ptFlavor.flavor_text;
+                        }
+                    }
+                    
+                    if (!description) {
+                        if (data.effect_entries) {
+                            const enEffect = data.effect_entries.find(e => e.language.name === 'en');
+                            if (enEffect && enEffect.effect) {
+                                description = enEffect.effect;
+                            }
+                        }
+                        
+                        if (!description && data.flavor_text_entries) {
+                            const enFlavor = data.flavor_text_entries.find(f => f.language.name === 'en');
+                            if (enFlavor && enFlavor.flavor_text) {
+                                description = enFlavor.flavor_text;
+                            }
+                        }
+                    }
+                    
+                    abilityCache.set(abilityName, {
+                        name: formatName(abilityName),
+                        description: description || 'Descrição não disponível.',
+                        isHidden: ability.is_hidden,
+                        hasPortuguese: true
+                    });
+                    
+                } catch (error) {
+                    console.warn(`Erro ao carregar habilidade ${abilityName}:`, error);
+                    abilityCache.set(abilityName, {
+                        name: formatName(abilityName),
+                        description: 'Erro ao carregar descrição.',
+                        isHidden: ability.is_hidden,
+                        hasPortuguese: false
+                    });
+                }
+            }
+        }
+    }
+
+    // ==================== RENDERIZAÇÃO DE GRÁFICOS ====================
+    function renderWeaknessChart(weaknesses) {
+        const ctx = document.getElementById('weaknessChart');
+        if (!ctx) return;
+        
+        if (weaknessChart) weaknessChart.destroy();
+        
+        const filteredWeaknesses = Object.entries(weaknesses)
+            .filter(([type, multiplier]) => multiplier !== 1)
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 8); // Limitar a 8 tipos para gráfico mais limpo
+        
+        if (filteredWeaknesses.length === 0) {
+            ctx.parentElement.innerHTML = '<p style="text-align: center; color: var(--gray); padding: 20px;">Sem fraquezas ou resistências significativas</p>';
             return;
         }
         
-        let html = '';
-        const maxVisible = 7;
-        let start = Math.max(1, currentPage - 3);
-        let end = Math.min(totalPages, start + maxVisible - 1);
+        const labels = filteredWeaknesses.map(([type]) => TYPE_MAP[type] || type);
+        const data = filteredWeaknesses.map(([_, multiplier]) => multiplier);
+        const colors = filteredWeaknesses.map(([type]) => {
+            const colorMap = {
+                'normal': '#A8A878', 'fire': '#F08030', 'water': '#6890F0',
+                'electric': '#F8D030', 'grass': '#78C850', 'ice': '#98D8D8',
+                'fighting': '#C03028', 'poison': '#A040A0', 'ground': '#E0C068',
+                'flying': '#A890F0', 'psychic': '#F85888', 'bug': '#A8B820',
+                'rock': '#B8A038', 'ghost': '#705898', 'dragon': '#7038F8',
+                'dark': '#705848', 'steel': '#B8B8D0', 'fairy': '#EE99AC'
+            };
+            return colorMap[type] || '#777';
+        });
         
-        if (end - start + 1 < maxVisible) {
-            start = Math.max(1, end - maxVisible + 1);
-        }
+        weaknessChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: data,
+                    backgroundColor: colors,
+                    borderColor: 'rgba(255, 255, 255, 0.2)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const multiplier = context.raw;
+                                if (multiplier === 0) return '0× (Imune)';
+                                if (multiplier === 0.25) return '¼× (Muito Resistente)';
+                                if (multiplier === 0.5) return '½× (Resistente)';
+                                if (multiplier === 2) return '2× (Fraco)';
+                                if (multiplier === 4) return '4× (Muito Fraco)';
+                                return `${multiplier}×`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 4,
+                        ticks: {
+                            color: 'rgba(255, 255, 255, 0.7)',
+                            callback: function(value) {
+                                if (value === 0) return '0×';
+                                if (value === 0.5) return '½×';
+                                if (value === 1) return '1×';
+                                if (value === 2) return '2×';
+                                if (value === 4) return '4×';
+                                return value + '×';
+                            }
+                        },
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                    },
+                    x: {
+                        ticks: { color: 'rgba(255, 255, 255, 0.7)' },
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+    }
+
+    function renderStatsChart(stats) {
+        const ctx = document.getElementById('statsChart');
+        if (!ctx) return;
         
-        if (start > 1) {
-            html += `<button class="page-btn" onclick="changePage(1)">«</button>`;
-            if (start > 2) {
-                html += `<span style="padding: 10px; color: var(--gray);">...</span>`;
+        const labels = usePortuguese ? 
+            ['HP', 'Ataque', 'Defesa', 'Sp. Atk', 'Sp. Def', 'Velocidade'] :
+            ['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed'];
+        
+        const data = [
+            stats.hp, stats.attack, stats.defense,
+            stats.specialAttack, stats.specialDefense, stats.speed
+        ];
+        
+        if (statsChart) statsChart.destroy();
+        
+        statsChart = new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Estatísticas',
+                    data: data,
+                    backgroundColor: 'rgba(76, 175, 80, 0.2)',
+                    borderColor: 'rgba(76, 175, 80, 1)',
+                    borderWidth: 2,
+                    pointBackgroundColor: '#4CAF50',
+                    pointBorderColor: '#fff',
+                    pointRadius: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 255,
+                        ticks: { display: false },
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                        pointLabels: { 
+                            color: 'rgba(255, 255, 255, 0.8)',
+                            font: { size: 11 }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+    }
+
+    function renderMovesChart(movesData) {
+        const ctx = document.getElementById('movesChart');
+        if (!ctx) return;
+        
+        if (movesChart) movesChart.destroy();
+        
+        const movesByType = {};
+        movesData.forEach(move => {
+            if (!movesByType[move.type]) {
+                movesByType[move.type] = 0;
+            }
+            movesByType[move.type]++;
+        });
+        
+        const labels = Object.keys(movesByType).map(type => TYPE_MAP[type] || type);
+        const data = Object.values(movesByType);
+        
+        if (labels.length === 0) return;
+        
+        movesChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: data,
+                    backgroundColor: labels.map(label => {
+                        const type = Object.keys(TYPE_MAP).find(key => TYPE_MAP[key] === label) || label.toLowerCase();
+                        const colorMap = {
+                            'normal': '#A8A878', 'fire': '#F08030', 'water': '#6890F0',
+                            'electric': '#F8D030', 'grass': '#78C850', 'ice': '#98D8D8',
+                            'fighting': '#C03028', 'poison': '#A040A0', 'ground': '#E0C068',
+                            'flying': '#A890F0', 'psychic': '#F85888', 'bug': '#A8B820',
+                            'rock': '#B8A038', 'ghost': '#705898', 'dragon': '#7038F8',
+                            'dark': '#705848', 'steel': '#B8B8D0', 'fairy': '#EE99AC'
+                        };
+                        return colorMap[type] || '#777';
+                    }),
+                    borderColor: 'rgba(255, 255, 255, 0.1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: { 
+                            color: 'rgba(255, 255, 255, 0.8)',
+                            font: { size: 10 }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    function renderEvolutionChart(evolutionData, chainPokemon) {
+        const ctx = document.getElementById('evolutionChart');
+        if (!ctx) return;
+        
+        if (evolutionChart) evolutionChart.destroy();
+        
+        const statsData = [];
+        const labels = [];
+        
+        for (const pokeId of chainPokemon) {
+            const pokemon = pokemonCache.get(pokeId);
+            if (pokemon) {
+                statsData.push(pokemon.stats.total);
+                labels.push(`#${pokeId.toString().padStart(4, '0')}`);
             }
         }
         
-        for (let i = start; i <= end; i++) {
-            html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</button>`;
-        }
+        if (statsData.length < 2) return;
         
-        if (end < totalPages) {
-            if (end < totalPages - 1) {
-                html += `<span style="padding: 10px; color: var(--gray);">...</span>`;
+        evolutionChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Total de Stats',
+                    data: statsData,
+                    borderColor: '#9C27B0',
+                    backgroundColor: 'rgba(156, 39, 176, 0.1)',
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { 
+                        labels: { 
+                            color: 'rgba(255, 255, 255, 0.8)',
+                            font: { size: 11 }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        ticks: { 
+                            color: 'rgba(255, 255, 255, 0.7)',
+                            font: { size: 10 }
+                        },
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                    },
+                    x: {
+                        ticks: { 
+                            color: 'rgba(255, 255, 255, 0.7)',
+                            font: { size: 10 }
+                        },
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                    }
+                }
             }
-            html += `<button class="page-btn" onclick="changePage(${totalPages})">»</button>`;
-        }
+        });
+    }
+
+    function setupMovesFilter() {
+        const filterButtons = document.querySelectorAll('.move-filter-btn');
+        const moveItems = document.querySelectorAll('.move-item');
         
-        pagination.innerHTML = html;
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                filterButtons.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const filter = this.dataset.filter;
+                
+                moveItems.forEach(item => {
+                    if (filter === 'all') {
+                        item.style.display = 'grid';
+                    } else {
+                        const moveClass = item.dataset.class;
+                        item.style.display = moveClass === filter ? 'grid' : 'none';
+                    }
+                });
+            });
+        });
     }
 
-    function changePage(page) {
-        currentPage = page;
-        renderPokemonList();
-        setupPagination();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // ==================== FILTROS ====================
+    // ==================== FUNÇÕES DE PAGINAÇÃO E FILTROS ====================
     function setupEventListeners() {
-        const searchInput = document.getElementById('searchInput');
-        searchInput.addEventListener('input', function() {
+        document.getElementById('searchInput').addEventListener('input', function() {
             currentSearchTerm = this.value.toLowerCase().trim();
             applyFilters();
         });
         
-        const typeFilter = document.getElementById('typeFilter');
-        typeFilter.addEventListener('change', function() {
+        document.getElementById('typeFilter').addEventListener('change', function() {
             currentTypeFilter = this.value;
             applyFilters();
         });
@@ -1526,7 +2397,6 @@
         if (currentSearchTerm) {
             filtered = filtered.filter(p => {
                 if (!p.isLoaded) return false;
-                
                 const searchInPT = p.namePT && p.namePT.toLowerCase().includes(currentSearchTerm);
                 const searchInEN = p.name && p.name.toLowerCase().includes(currentSearchTerm);
                 const searchInId = p.id.toString().includes(currentSearchTerm);
@@ -1540,608 +2410,49 @@
         setupPagination();
     }
 
-    // ==================== DETALHES DO POKÉMON ====================
-    async function openPokemonDetail(pokemonId) {
-        document.getElementById('pokemonModal').dataset.currentPokemonId = pokemonId;
+    function setupPagination() {
+        const pagination = document.getElementById('pagination');
+        const totalPages = Math.ceil(filteredPokemon.length / ITEMS_PER_PAGE);
         
-        let pokemon = pokemonCache.get(pokemonId);
-        
-        // Carregar dados se necessário
-        if (!pokemon) {
-            pokemon = await loadSinglePokemon(pokemonId);
-            if (!pokemon) {
-                alert("Não foi possível carregar os detalhes deste Pokémon.");
-                return;
-            }
+        if (totalPages <= 1) {
+            pagination.innerHTML = '';
+            return;
         }
         
-        // Mostrar loading
-        document.getElementById('modalLeft').innerHTML = `
-            <div class="loading">
-                <div class="loading-spinner"></div>
-                <p>Carregando detalhes...</p>
-            </div>
-        `;
-        document.getElementById('modalRight').innerHTML = '';
+        let html = '';
+        const maxVisible = 7;
+        let start = Math.max(1, currentPage - 3);
+        let end = Math.min(totalPages, start + maxVisible - 1);
         
-        document.getElementById('pokemonModal').style.display = 'block';
-        document.body.style.overflow = 'hidden';
-        
-        try {
-            // Carregar dados adicionais
-            const [speciesData, typeData] = await Promise.all([
-                pokemon.speciesData ? Promise.resolve(pokemon.speciesData) : 
-                    fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonId}/`).then(r => r.ok ? r.json() : null),
-                loadTypeData(pokemon.types)
-            ]);
-            
-            // Carregar descrições das habilidades
-            await loadAbilityDescriptionsPT(pokemon.abilities);
-            
-            // Renderizar detalhes
-            renderPokemonDetailPage(pokemon, speciesData, typeData);
-            
-        } catch (error) {
-            console.error('Erro ao carregar detalhes:', error);
-            renderBasicPokemonDetail(pokemon);
-        }
-    }
-
-    // Carregar dados de tipos para calcular fraquezas
-    async function loadTypeData(pokemonTypes) {
-        const typeData = {};
-        
-        for (const type of pokemonTypes) {
-            if (!typeCache.has(type)) {
-                try {
-                    const response = await fetch(`https://pokeapi.co/api/v2/type/${type}/`);
-                    if (response.ok) {
-                        const data = await response.json();
-                        typeCache.set(type, data);
-                    }
-                } catch (error) {
-                    console.warn(`Erro ao carregar tipo ${type}:`, error);
-                }
-            }
-            
-            if (typeCache.has(type)) {
-                typeData[type] = typeCache.get(type);
-            }
+        if (end - start + 1 < maxVisible) {
+            start = Math.max(1, end - maxVisible + 1);
         }
         
-        return typeData;
-    }
-
-    // Calcular fraquezas baseadas nos dados da PokeAPI
-    function calculateWeaknesses(pokemonTypes, typeData) {
-        const weaknesses = {};
-        
-        // Inicializar todas as fraquezas como 1 (dano normal)
-        Object.keys(TYPE_MAP).forEach(type => {
-            weaknesses[type] = 1;
-        });
-        
-        // Calcular multiplicadores para cada tipo do Pokémon
-        pokemonTypes.forEach(pokemonType => {
-            if (typeData[pokemonType]) {
-                const typeInfo = typeData[pokemonType];
-                
-                // Dano dobrado (fraqueza)
-                if (typeInfo.damage_relations.double_damage_from) {
-                    typeInfo.damage_relations.double_damage_from.forEach(weakType => {
-                        weaknesses[weakType.name] *= 2;
-                    });
-                }
-                
-                // Dano reduzido pela metade (resistência)
-                if (typeInfo.damage_relations.half_damage_from) {
-                    typeInfo.damage_relations.half_damage_from.forEach(resistType => {
-                        weaknesses[resistType.name] *= 0.5;
-                    });
-                }
-                
-                // Dano zero (imunidade)
-                if (typeInfo.damage_relations.no_damage_from) {
-                    typeInfo.damage_relations.no_damage_from.forEach(immuneType => {
-                        weaknesses[immuneType.name] = 0;
-                    });
-                }
-            }
-        });
-        
-        return weaknesses;
-    }
-
-    // CARREGAR DESCRIÇÕES DAS HABILIDADES - VERSÃO SIMPLIFICADA
-    async function loadAbilityDescriptionsPT(abilities) {
-        for (const ability of abilities) {
-            const abilityName = ability.ability.name;
-            
-            if (!abilityCache.has(abilityName)) {
-                try {
-                    const response = await fetch(ability.ability.url);
-                    const data = await response.json();
-                    
-                    let description = null;
-                    let hasPortuguese = true;
-                    
-                    // 1. Tentar português primeiro
-                    if (data.effect_entries) {
-                        const ptEffect = data.effect_entries.find(e => e.language.name === 'pt-BR');
-                        if (ptEffect && ptEffect.effect) {
-                            description = ptEffect.effect;
-                        }
-                    }
-                    
-                    if (!description && data.flavor_text_entries) {
-                        const ptFlavor = data.flavor_text_entries.find(f => f.language.name === 'pt-BR');
-                        if (ptFlavor && ptFlavor.flavor_text) {
-                            description = ptFlavor.flavor_text;
-                        }
-                    }
-                    
-                    // 2. Se não tem português, tentar inglês
-                    if (!description) {
-                        hasPortuguese = false;
-                        
-                        if (data.effect_entries) {
-                            const enEffect = data.effect_entries.find(e => e.language.name === 'en');
-                            if (enEffect && enEffect.effect) {
-                                description = enEffect.effect;
-                            }
-                        }
-                        
-                        if (!description && data.flavor_text_entries) {
-                            const enFlavor = data.flavor_text_entries.find(f => f.language.name === 'en');
-                            if (enFlavor && enFlavor.flavor_text) {
-                                description = enFlavor.flavor_text;
-                            }
-                        }
-                        
-                        // 3. Se não tem nada
-                        if (!description) {
-                            description = 'Descrição não disponível para esta habilidade.';
-                        }
-                    }
-                    
-                    // Formatar nome
-                    const formattedName = abilityName
-                        .split('-')
-                        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                        .join(' ');
-                    
-                    // Salvar no cache
-                    abilityCache.set(abilityName, {
-                        name: formattedName,
-                        description: description,
-                        isHidden: ability.is_hidden,
-                        hasPortuguese: hasPortuguese
-                    });
-                    
-                } catch (error) {
-                    console.warn(`Erro ao carregar habilidade ${abilityName}:`, error);
-                    
-                    const formattedName = abilityName
-                        .split('-')
-                        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                        .join(' ');
-                    
-                    abilityCache.set(abilityName, {
-                        name: formattedName,
-                        description: 'Erro ao carregar descrição. Tente novamente.',
-                        isHidden: ability.is_hidden,
-                        hasPortuguese: false
-                    });
-                }
-            }
-        }
-    }
-
-    function renderPokemonDetailPage(pokemon, speciesData, typeData) {
-        const displayName = usePortuguese ? pokemon.namePT : formatName(pokemon.name);
-        
-        // Calcular fraquezas
-        const weaknesses = calculateWeaknesses(pokemon.types, typeData);
-        
-        // COLUNA ESQUERDA
-        let leftHtml = `
-            <img class="pokemon-detail-image" 
-                 src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png" 
-                 alt="${displayName}"
-                 onerror="this.src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png'">
-            <h2 class="detail-title">${displayName}</h2>
-            <div class="detail-number">#${pokemon.id.toString().padStart(4, '0')}</div>
-            <div class="detail-types">
-                ${pokemon.types.map(type => `
-                    <span class="type-tag type-${type}">
-                        ${TYPE_MAP[type] || type}
-                    </span>
-                `).join('')}
-            </div>
-            
-            <div class="weakness-chart-container">
-                <div class="weakness-title">Fraquezas</div>
-                <div class="weakness-chart-wrapper">
-                    <canvas id="weaknessChart"></canvas>
-                </div>
-            </div>
-        `;
-        
-        document.getElementById('modalLeft').innerHTML = leftHtml;
-        renderWeaknessChart(weaknesses);
-        
-        // COLUNA DIREITA
-        let rightHtml = '';
-        
-        // 1. POKÉDEX DATA
-        let speciesName = 'Pokémon';
-        if (speciesData) {
-            if (usePortuguese) {
-                const ptGenus = speciesData.genera?.find(g => g.language.name === 'pt-BR');
-                speciesName = ptGenus?.genus || speciesData.genera?.find(g => g.language.name === 'en')?.genus || 'Pokémon';
-            } else {
-                const enGenus = speciesData.genera?.find(g => g.language.name === 'en');
-                speciesName = enGenus?.genus || 'Pokémon';
-            }
+        if (start > 1) {
+            html += `<button class="page-btn" onclick="changePage(1)">«</button>`;
         }
         
-        rightHtml += `
-            <div class="detail-section">
-                <h3 class="section-title"><i class="fas fa-id-card"></i> Dados da Pokédex</h3>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <span class="info-label">Número Nacional</span>
-                        <span class="info-value">#${pokemon.id.toString().padStart(4, '0')}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Tipo</span>
-                        <span class="info-value">${pokemon.types.map(t => TYPE_MAP[t]).join(', ')}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Espécie</span>
-                        <span class="info-value">${speciesName}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Altura</span>
-                        <span class="info-value">${pokemon.height} m</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Peso</span>
-                        <span class="info-value">${pokemon.weight} kg</span>
-                    </div>
-                </div>
-            </div>
-        `;
-        
-        // 2. ABILITIES
-        if (pokemon.abilities.length > 0) {
-            rightHtml += `
-                <div class="detail-section">
-                    <h3 class="section-title"><i class="fas fa-star"></i> Habilidades</h3>
-            `;
-            
-            const sortedAbilities = [...pokemon.abilities].sort((a, b) => 
-                (a.is_hidden ? 1 : 0) - (b.is_hidden ? 1 : 0)
-            );
-            
-            sortedAbilities.forEach(ability => {
-                const abilityInfo = abilityCache.get(ability.ability.name) || {
-                    name: ability.ability.name
-                        .split('-')
-                        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                        .join(' '),
-                    description: 'Carregando descrição...',
-                    isHidden: ability.is_hidden,
-                    hasPortuguese: true
-                };
-                
-                rightHtml += `
-                    <div class="ability-item">
-                        <div class="ability-name">
-                            <i class="fas fa-bolt"></i>
-                            ${abilityInfo.name}
-                            ${abilityInfo.isHidden ? 
-                                '<span class="ability-hidden">Habilidade Oculta</span>' : 
-                                ''}
-                            ${!abilityInfo.hasPortuguese ? 
-                                '<span style="margin-left: 8px; color: #ff9800; font-size: 0.8rem; background: rgba(255,152,0,0.1); padding: 2px 8px; border-radius: 10px; border: 1px solid #ff9800;"><i class="fas fa-language"></i> Somente EN</span>' : 
-                                ''}
-                        </div>
-                        <div class="ability-description">
-                            ${abilityInfo.description}
-                        </div>
-                    </div>
-                `;
-            });
-            
-            rightHtml += `</div>`;
+        for (let i = start; i <= end; i++) {
+            html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</button>`;
         }
         
-        // 3. BASE STATS
-        rightHtml += `
-            <div class="detail-section">
-                <h3 class="section-title"><i class="fas fa-chart-bar"></i> Estatísticas Base</h3>
-                <div class="stats-container">
-                    <div class="stats-grid">
-                        ${Object.entries({
-                            hp: { value: pokemon.stats.hp, label: 'HP', color: '#2ecc71' },
-                            attack: { value: pokemon.stats.attack, label: 'Ataque', color: '#e74c3c' },
-                            defense: { value: pokemon.stats.defense, label: 'Defesa', color: '#f39c12' },
-                            specialAttack: { value: pokemon.stats.specialAttack, label: 'Ataque Especial', color: '#9b59b6' },
-                            specialDefense: { value: pokemon.stats.specialDefense, label: 'Defesa Especial', color: '#ec4899' },
-                            speed: { value: pokemon.stats.speed, label: 'Velocidade', color: '#3498db' }
-                        }).map(([key, stat]) => {
-                            const ranges = calculateStatRanges(pokemon.stats[key], key === 'hp');
-                            return `
-                                <div class="stat-box">
-                                    <div class="stat-name">${stat.label}</div>
-                                    <div class="stat-value" style="color: ${stat.color}">${pokemon.stats[key]}</div>
-                                    <div class="stat-range">
-                                        Min: ${ranges.min} | Max: ${ranges.max}
-                                    </div>
-                                </div>
-                            `;
-                        }).join('')}
-                    </div>
-                    <div>
-                        <canvas id="statsChart" style="width: 100%; height: 250px;"></canvas>
-                    </div>
-                </div>
-            </div>
-        `;
-        
-        // 4. POKÉDEX DESCRIPTION
-        if (speciesData) {
-            let pokedexText = '';
-            if (usePortuguese) {
-                const ptEntry = speciesData.flavor_text_entries?.find(f => f.language.name === 'pt-BR');
-                pokedexText = ptEntry?.flavor_text || 
-                             speciesData.flavor_text_entries?.find(f => f.language.name === 'en')?.flavor_text || 
-                             'Descrição não disponível.';
-            } else {
-                const enEntry = speciesData.flavor_text_entries?.find(f => f.language.name === 'en');
-                pokedexText = enEntry?.flavor_text || 'Description not available.';
-            }
-            
-            pokedexText = pokedexText.replace(/\n/g, ' ').replace(/\f/g, ' ');
-            
-            rightHtml += `
-                <div class="detail-section">
-                    <h3 class="section-title"><i class="fas fa-book"></i> Entrada da Pokédex</h3>
-                    <p style="color: var(--gray); line-height: 1.6; font-style: italic;">
-                        "${pokedexText}"
-                    </p>
-                </div>
-            `;
+        if (end < totalPages) {
+            html += `<button class="page-btn" onclick="changePage(${totalPages})">»</button>`;
         }
         
-        document.getElementById('modalRight').innerHTML = rightHtml;
-        renderStatsChart(pokemon.stats);
+        pagination.innerHTML = html;
     }
 
-    function renderWeaknessChart(weaknesses) {
-        const ctx = document.getElementById('weaknessChart');
-        if (!ctx) return;
-        
-        if (weaknessChart) weaknessChart.destroy();
-        
-        const filteredWeaknesses = Object.entries(weaknesses)
-            .filter(([type, multiplier]) => multiplier !== 1)
-            .sort((a, b) => b[1] - a[1]);
-        
-        const labels = filteredWeaknesses.map(([type]) => TYPE_MAP[type] || type);
-        const data = filteredWeaknesses.map(([_, multiplier]) => multiplier);
-        const colors = filteredWeaknesses.map(([type]) => {
-            const colorMap = {
-                'normal': '#A8A878', 'fire': '#F08030', 'water': '#6890F0',
-                'electric': '#F8D030', 'grass': '#78C850', 'ice': '#98D8D8',
-                'fighting': '#C03028', 'poison': '#A040A0', 'ground': '#E0C068',
-                'flying': '#A890F0', 'psychic': '#F85888', 'bug': '#A8B820',
-                'rock': '#B8A038', 'ghost': '#705898', 'dragon': '#7038F8',
-                'dark': '#705848', 'steel': '#B8B8D0', 'fairy': '#EE99AC'
-            };
-            return colorMap[type] || '#777777';
-        });
-        
-        weaknessChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Multiplicador de Dano',
-                    data: data,
-                    backgroundColor: colors,
-                    borderColor: 'rgba(255, 255, 255, 0.2)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                const multiplier = context.raw;
-                                let text = `${multiplier}×`;
-                                if (multiplier === 0) text = '0× (Imune)';
-                                else if (multiplier === 0.25) text = '¼× (Muito Resistente)';
-                                else if (multiplier === 0.5) text = '½× (Resistente)';
-                                else if (multiplier === 2) text = '2× (Fraco)';
-                                else if (multiplier === 4) text = '4× (Muito Fraco)';
-                                return text;
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        max: 4,
-                        ticks: {
-                            callback: function(value) {
-                                if (value === 0) return '0×';
-                                if (value === 0.25) return '¼×';
-                                if (value === 0.5) return '½×';
-                                if (value === 1) return '1×';
-                                if (value === 2) return '2×';
-                                if (value === 4) return '4×';
-                                return value + '×';
-                            },
-                            color: 'rgba(255, 255, 255, 0.7)'
-                        },
-                        grid: {
-                            color: 'rgba(255, 255, 255, 0.1)'
-                        }
-                    },
-                    x: {
-                        ticks: {
-                            color: 'rgba(255, 255, 255, 0.7)'
-                        },
-                        grid: {
-                            display: false
-                        }
-                    }
-                }
-            }
-        });
+    function changePage(page) {
+        currentPage = page;
+        renderPokemonList();
+        setupPagination();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function renderStatsChart(stats) {
-        const ctx = document.getElementById('statsChart');
-        if (!ctx) return;
-        
-        const labels = usePortuguese ? 
-            ['HP', 'Ataque', 'Defesa', 'Ataque Esp.', 'Defesa Esp.', 'Velocidade'] :
-            ['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed'];
-        
-        const data = [
-            stats.hp, stats.attack, stats.defense,
-            stats.specialAttack, stats.specialDefense, stats.speed
-        ];
-        
-        if (statsChart) statsChart.destroy();
-        
-        statsChart = new Chart(ctx, {
-            type: 'radar',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Estatísticas Base',
-                    data: data,
-                    backgroundColor: 'rgba(76, 175, 80, 0.2)',
-                    borderColor: 'rgba(76, 175, 80, 1)',
-                    borderWidth: 2,
-                    pointBackgroundColor: [
-                        '#2ecc71', '#e74c3c', '#f39c12', 
-                        '#9b59b6', '#ec4899', '#3498db'
-                    ],
-                    pointBorderColor: '#fff',
-                    pointRadius: 4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false }
-                },
-                scales: {
-                    r: {
-                        beginAtZero: true,
-                        max: 255,
-                        ticks: { display: false },
-                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
-                        pointLabels: {
-                            color: 'rgba(255, 255, 255, 0.8)',
-                            font: { size: 12 }
-                        }
-                    }
-                }
-            }
-        });
-    }
-
-    function renderBasicPokemonDetail(pokemon) {
-        const displayName = usePortuguese ? pokemon.namePT : formatName(pokemon.name);
-        
-        document.getElementById('modalLeft').innerHTML = `
-            <img class="pokemon-detail-image" 
-                 src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png" 
-                 alt="${displayName}">
-            <h2 class="detail-title">${displayName}</h2>
-            <div class="detail-number">#${pokemon.id.toString().padStart(4, '0')}</div>
-            <div class="detail-types">
-                ${pokemon.types.map(type => `
-                    <span class="type-tag type-${type}">
-                        ${TYPE_MAP[type] || type}
-                    </span>
-                `).join('')}
-            </div>
-        `;
-        
-        document.getElementById('modalRight').innerHTML = `
-            <div class="detail-section">
-                <h3 class="section-title"><i class="fas fa-info-circle"></i> Informações Básicas</h3>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <span class="info-label">Número</span>
-                        <span class="info-value">#${pokemon.id.toString().padStart(4, '0')}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Tipos</span>
-                        <span class="info-value">${pokemon.types.map(t => TYPE_MAP[t]).join(', ')}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Altura</span>
-                        <span class="info-value">${pokemon.height} m</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Peso</span>
-                        <span class="info-value">${pokemon.weight} kg</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="detail-section">
-                <h3 class="section-title"><i class="fas fa-chart-bar"></i> Estatísticas</h3>
-                <div class="stats-grid">
-                    ${Object.entries({
-                        hp: { value: pokemon.stats.hp, label: 'HP', color: '#2ecc71' },
-                        attack: { value: pokemon.stats.attack, label: 'Ataque', color: '#e74c3c' },
-                        defense: { value: pokemon.stats.defense, label: 'Defesa', color: '#f39c12' },
-                        specialAttack: { value: pokemon.stats.specialAttack, label: 'Sp. Ataque', color: '#9b59b6' },
-                        specialDefense: { value: pokemon.stats.specialDefense, label: 'Sp. Defesa', color: '#ec4899' },
-                        speed: { value: pokemon.stats.speed, label: 'Velocidade', color: '#3498db' }
-                    }).map(([key, stat]) => `
-                        <div class="stat-box">
-                            <div class="stat-name">${stat.label}</div>
-                            <div class="stat-value" style="color: ${stat.color}">${pokemon.stats[key]}</div>
-                        </div>
-                    `).join('')}
-                </div>
-            </div>
-        `;
-    }
-
-    function calculateStatRanges(baseStat, isHP = false) {
-        if (isHP) {
-            const min = Math.floor((2 * baseStat) * 100 / 100 + 100 + 10);
-            const max = Math.floor((2 * baseStat + 31 + 63) * 100 / 100 + 100 + 10);
-            return { min, max };
-        }
-        
-        const min = Math.floor((Math.floor((2 * baseStat) * 100 / 100 + 5) * 0.9));
-        const max = Math.floor((Math.floor((2 * baseStat + 31 + 63) * 100 / 100 + 5) * 1.1));
-        return { min, max };
-    }
-
-    // ==================== UTILITÁRIOS ====================
+    // ==================== FUNÇÕES DE UTILIDADE ====================
     function showLoading(show) {
         const container = document.getElementById('pokemonListContainer');
-        if (!container) return;
-        
         if (show) {
             container.innerHTML = `
                 <div class="loading">
@@ -2154,9 +2465,7 @@
 
     function updateLoadingText(text) {
         const loadingText = document.getElementById('loadingText');
-        if (loadingText) {
-            loadingText.textContent = text;
-        }
+        if (loadingText) loadingText.textContent = text;
     }
 
     function showError() {
@@ -2176,14 +2485,50 @@
     function closeModal() {
         document.getElementById('pokemonModal').style.display = 'none';
         document.body.style.overflow = 'auto';
-        if (statsChart) {
-            statsChart.destroy();
-            statsChart = null;
+        
+        // Destruir gráficos
+        [statsChart, weaknessChart, movesChart, evolutionChart].forEach(chart => {
+            if (chart) chart.destroy();
+        });
+        
+        statsChart = weaknessChart = movesChart = evolutionChart = null;
+    }
+
+    async function loadPokemonDetailsInBatches(startFrom = 0) {
+        if (isLoadingDetails) return;
+        isLoadingDetails = true;
+        
+        for (let i = startFrom; i < POKEMON_COUNT; i += BATCH_SIZE) {
+            const end = Math.min(i + BATCH_SIZE, POKEMON_COUNT);
+            const promises = [];
+            
+            for (let j = i; j < end; j++) {
+                if (!allPokemon[j] || !allPokemon[j].isLoaded) {
+                    promises.push(loadSinglePokemon(j + 1));
+                }
+            }
+            
+            await Promise.all(promises);
+            loadedCount = end;
+            
+            updateAllPokemonFromCache();
+            updateVisiblePokemon();
+            
+            await new Promise(resolve => setTimeout(resolve, 100));
         }
-        if (weaknessChart) {
-            weaknessChart.destroy();
-            weaknessChart = null;
+        
+        isLoadingDetails = false;
+    }
+
+    function updateAllPokemonFromCache() {
+        for (let i = 0; i < allPokemon.length; i++) {
+            const cachedPokemon = pokemonCache.get(i + 1);
+            if (cachedPokemon) {
+                allPokemon[i] = cachedPokemon;
+            }
         }
+        filteredPokemon = [...allPokemon];
+        applyFilters();
     }
 
     function updateVisiblePokemon() {
@@ -2206,41 +2551,79 @@
         cards.forEach(card => {
             const cardId = parseInt(card.querySelector('.pokemon-number')?.textContent.replace('#', '') || '0');
             if (cardId === id) {
-                updateCardContent(card, pokemon);
+                const displayName = usePortuguese ? pokemon.namePT : formatName(pokemon.name);
+                const nameElement = card.querySelector('.pokemon-name div div');
+                if (nameElement) nameElement.textContent = displayName;
+                
+                const typesContainer = card.querySelector('.pokemon-types');
+                if (typesContainer) {
+                    typesContainer.innerHTML = pokemon.types.map(type => `
+                        <span class="type-tag type-${type}">${TYPE_MAP[type] || type}</span>
+                    `).join('');
+                }
             }
         });
     }
 
-    function updateCardContent(card, pokemon) {
+    function renderBasicPokemonDetail(pokemon) {
         const displayName = usePortuguese ? pokemon.namePT : formatName(pokemon.name);
         
-        const nameElement = card.querySelector('.pokemon-name div div');
-        if (nameElement) {
-            nameElement.textContent = displayName;
-        }
+        document.getElementById('modalLeft').innerHTML = `
+            <img class="pokemon-detail-image" 
+                 src="${pokemon.sprite}" 
+                 alt="${displayName}">
+            <h2 class="detail-title">${displayName}</h2>
+            <div class="detail-number">#${pokemon.id.toString().padStart(4, '0')}</div>
+            <div class="detail-types">
+                ${pokemon.types.map(type => `
+                    <span class="type-tag type-${type}">
+                        ${TYPE_MAP[type] || type}
+                    </span>
+                `).join('')}
+            </div>
+            <div class="pokedex-data">
+                <div class="pokedex-data-title">Dados da Pokédex</div>
+                <div class="pokedex-grid">
+                    <div class="pokedex-item">
+                        <span class="pokedex-label">Número</span>
+                        <span class="pokedex-value">#${pokemon.id.toString().padStart(4, '0')}</span>
+                    </div>
+                    <div class="pokedex-item">
+                        <span class="pokedex-label">Tipos</span>
+                        <span class="pokedex-value">${pokemon.types.map(t => TYPE_MAP[t]).join(', ')}</span>
+                    </div>
+                    <div class="pokedex-item">
+                        <span class="pokedex-label">Altura</span>
+                        <span class="pokedex-value">${pokemon.height} m</span>
+                    </div>
+                    <div class="pokedex-item">
+                        <span class="pokedex-label">Peso</span>
+                        <span class="pokedex-value">${pokemon.weight} kg</span>
+                    </div>
+                </div>
+            </div>
+        `;
         
-        const typesContainer = card.querySelector('.pokemon-types');
-        if (typesContainer) {
-            typesContainer.innerHTML = pokemon.types.map(type => `
-                <span class="type-tag type-${type}">${TYPE_MAP[type] || type}</span>
-            `).join('');
-        }
-        
-        const statElements = {
-            'total': card.querySelector('.total-stat'),
-            'hp': card.querySelector('.hp-stat'),
-            'attack': card.querySelector('.atk-stat'),
-            'defense': card.querySelector('.def-stat'),
-            'specialAttack': card.querySelector('.spatk-stat'),
-            'specialDefense': card.querySelector('.spdef-stat'),
-            'speed': card.querySelector('.speed-stat')
-        };
-        
-        Object.entries(statElements).forEach(([stat, element]) => {
-            if (element && pokemon.stats[stat] !== undefined) {
-                element.textContent = pokemon.stats[stat];
-            }
-        });
+        document.getElementById('modalRight').innerHTML = `
+            <div class="detail-section">
+                <h3 class="section-title"><i class="fas fa-chart-bar"></i> Estatísticas</h3>
+                <div class="stats-grid">
+                    ${Object.entries({
+                        hp: { value: pokemon.stats.hp, label: 'HP', color: '#2ecc71' },
+                        attack: { value: pokemon.stats.attack, label: 'Ataque', color: '#e74c3c' },
+                        defense: { value: pokemon.stats.defense, label: 'Defesa', color: '#f39c12' },
+                        specialAttack: { value: pokemon.stats.specialAttack, label: 'Sp. Atk', color: '#9b59b6' },
+                        specialDefense: { value: pokemon.stats.specialDefense, label: 'Sp. Def', color: '#ec4899' },
+                        speed: { value: pokemon.stats.speed, label: 'Velocidade', color: '#3498db' }
+                    }).map(([key, stat]) => `
+                        <div class="stat-box">
+                            <div class="stat-name">${stat.label}</div>
+                            <div class="stat-value" style="color: ${stat.color}">${pokemon.stats[key]}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
     }
 
     // ==================== FUNÇÕES GLOBAIS ====================
